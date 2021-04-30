@@ -5,6 +5,7 @@ RHEL EDGE DEMO with datagrid first push
 ![Demo1](images/example-1.gif)
 ![Demo2](images/example-2.gif)
 
+## To-Do add ansible scripts build-script and generator
 
 ## Initial Steps
 
