@@ -4,7 +4,7 @@ if [ ${CHECKLOGGINGUSER} != "root" ];
 then 
   echo "login as root user to run script."
   echo "running script as non root is not supported yet"
-  echo "please contribte @ githubpage"
+  echo "please contribte @ https://github.com/tosin2013/rhel-edge-datagrid"
   echo "You are currently logged in as $USER"
   exit 1
 fi
