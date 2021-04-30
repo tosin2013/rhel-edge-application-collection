@@ -6,7 +6,7 @@ RHEL EDGE DEMO with datagrid first push
 ![Demo2](images/example-2.gif)
 
 ## To-Do's  
-* add ansible scripts build-script and generator
+* add ansible playbooks for build-script and generator scripts
 * add script to generate pods 
 * add script to generate systemd-unit files
 * add Ansible tower for pipeline deployment  to remote sites
