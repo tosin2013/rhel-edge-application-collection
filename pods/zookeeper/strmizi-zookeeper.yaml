@@ -1,0 +1,76 @@
+# Generation of Kubernetes YAML is still under development!
+#
+# Save the output of this file and use kubectl create -f to import
+# it into Kubernetes.
+#
+# Created with podman-2.2.1
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: "2021-04-29T18:17:00Z"
+  labels:
+    app: strmizi-zookeeper
+  name: strmizi-zookeeper
+spec:
+  containers:
+  - command:
+    - bin/zookeeper-server-start.sh
+    - config/zookeeper.properties
+    env:
+    - name: PATH
+      value: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+    - name: TERM
+      value: xterm
+    - name: container
+      value: podman
+    - name: KAFKA_EXPORTER_VERSION
+      value: 1.2.0
+    - name: STUNNEL_HOME
+      value: /opt/stunnel
+    - name: CRUISE_CONTROL_HOME
+      value: /opt/cruise-control
+    - name: KAFKA_VERSION
+      value: 2.7.0
+    - name: TINI_SHA256
+      value: 12d20136605531b09a2c2dac02ccee85e1b874eb322ef6baf7561cd93f93c855
+    - name: KAFKA_HOME
+      value: /opt/kafka
+    - name: S2I_HOME
+      value: /opt/kafka/s2i
+    - name: STRIMZI_VERSION
+      value: 0.21.1
+    - name: KAFKA_EXPORTER_HOME
+      value: /opt/kafka-exporter
+    - name: LOG_DIR
+      value: /tmp/logs
+    - name: KAFKA_EXPORTER_CHECKSUM
+      value: 7afa40365ddf0cb0a88457684bd64d565e250c7e5a4536ba7f9d37d02d2808c3b07766f94e0b1338beb296573ade29db630948c931be44bde416c0410b5d783b  kafka_exporter-1.2.0.linux-amd64.tar.gz
+    - name: TINI_VERSION
+      value: v0.18.0
+    - name: HOSTNAME
+      value: strmizi-zookeeper
+    image: quay.io/strimzi/kafka:0.21.1-kafka-2.7.0
+    name: zookeeper
+    ports:
+    - containerPort: 2181
+      hostPort: 44461
+      protocol: TCP
+    resources: {}
+    securityContext:
+      allowPrivilegeEscalation: true
+      capabilities: {}
+      privileged: false
+      readOnlyRootFilesystem: false
+      runAsGroup: 0
+      runAsUser: 1001
+      seLinuxOptions: {}
+    workingDir: /opt/kafka
+  restartPolicy: Never
+status: {}
+---
+metadata:
+  creationTimestamp: null
+spec: {}
+status:
+  loadBalancer: {}
+

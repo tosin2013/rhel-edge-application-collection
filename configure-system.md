@@ -38,3 +38,20 @@ pip3 install podman-compose
 # echo "user.max_user_namespaces=28633" > /etc/sysctl.d/userns.conf
 # sysctl -p /etc/sysctl.d/userns.conf
 ```
+
+**Confiure /etc/hosts**
+```
+# podman network create --driver bridge rhel-edge --subnet 192.168.33.0/24
+# podman network inspect rhel-edge  --format '{{(index  .plugins  0).ipam.ranges}}' >/tmp/podmannetwork
+# IP=$(cat /tmp/podmannetwork | grep -oE "\b([0-9]{1,3}\.){3}[0-9]{1,3}\b")
+# echo $IP
+# IP_OCTECT=`echo $IP  | cut -d"." -f1-3`
+# echo $IP_OCTECT
+
+# sudo tee -a /etc/hosts > /dev/null <<EOT
+${IP_OCTECT}.10 postgresql  
+${IP_OCTECT}.11 zookeeper
+${IP_OCTECT}.12 kafka
+${IP_OCTECT}.13 datagrid
+EOT
+```
