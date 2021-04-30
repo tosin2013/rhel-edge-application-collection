@@ -49,7 +49,7 @@ cd  edge-datagrid
 **Container for testing**
 ```
  ./test-container/build-test-container.sh
-podman run -it -d  --network rhel-edge fedora /bin/bash 
+podman run -it -d  --network rhel-edge test-container:v1 /bin/bash 
 ```
 
 **To access DATAGRID**
