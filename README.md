@@ -11,6 +11,7 @@ RHEL EDGE DEMO with datagrid first push
 * add script to generate systemd-unit files
 * add Ansible tower for pipeline deployment  to remote sites
 * Use  [rhel-edge-automation-arch](https://github.com/redhat-cop/rhel-edge-automation-arch) to build images from current repo
+* Add rootless containers to build-script
 
 
 ## Initial Steps
