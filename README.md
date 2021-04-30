@@ -1,10 +1,9 @@
 # Edge datagrid
-> RHEL EDGE DEMO with datagrid first push
+## WIP 
+RHEL EDGE DEMO with datagrid first push
 
 ![Demo1](images/example-1.gif)
 ![Demo2](images/example-2.gif)
-
-[Configure RHEL 8 system](configure-system.md)
 
 
 ## Initial Steps
@@ -15,21 +14,14 @@
 
 **Automated Steps** 
 ```
-curl -OL http://gitea.tosins-lab.com:3000/tosin/edge-datagrid/raw/branch/master/build-scripts/configure-system.sh
+curl -OL https://raw.githubusercontent.com/tosin2013/rhel-edge-datagrid/main/build-scripts/configure-system.sh
 chmod +x configure-system.sh
 ./configure-system.sh
-```
-s
-**configure tmux**
-```
-curl -OL http://gitea.tosins-lab.com:3000/tosin/openstack16.1/raw/branch/master/configure-tmux.sh
-chmod +x configure-tmux.sh
-./configure-tmux.sh
 ```
 
 **Clone Git Repo**
 ```
-git clone http://gitea.tosins-lab.com:3000/tosin/edge-datagrid.git
+git clone https://github.com/tosin2013/rhel-edge-datagrid.git
 ```
 **Build Deployment**
 ```
@@ -64,7 +56,7 @@ HTTP/1.1 405 Method Not Allowed
 content-length: 11
 ```
 
-Links: 
+## Links: 
 * https://www.redhat.com/sysadmin/compose-podman-pods
 * [ref-docker-compose](https://stephennimmo.com/ref-docker-compose/)
 * https://www.redhat.com/sysadmin/container-networking-podman
