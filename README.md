@@ -5,7 +5,13 @@ RHEL EDGE DEMO with datagrid first push
 ![Demo1](images/example-1.gif)
 ![Demo2](images/example-2.gif)
 
-## To-Do add ansible scripts build-script and generator
+## To-Do add 
+* ansible scripts build-script and generator
+* add script to generate pods 
+* add script to generate systemd-unit files
+* add Ansible tower for pipeline deployment  to remote sites
+* Use  [rhel-edge-automation-arch](https://github.com/redhat-cop/rhel-edge-automation-arch) to build images from current repo
+
 
 ## Initial Steps
 
