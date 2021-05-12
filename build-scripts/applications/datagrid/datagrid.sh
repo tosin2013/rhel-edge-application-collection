@@ -13,11 +13,20 @@ login-to-registry
 
 
 echo "Building DATAGRID container"
-podman pod create --name datagrid -p 11222:11222 --network rhel-edge  --network slirp4netns:port_handler=slirp4netns
+# This does not work in a pod
+#podman pod create --name datagrid -p 11222:11222 --network rhel-edge  --network slirp4netns:port_handler=slirp4netns
+
+#podman  run  \
+#-d  \
+#--pod=datagrid \
+#-e USER="${USER_NAME}" \
+#-e PASS="${PASSWORD}" \
+#--name datagrid-8 \
+#${CONTAINER_IMAGE}
 
 podman  run  \
--d  \
---pod=datagrid \
+-d  -p 11222:11222 --net rhel-edge  --network slirp4netns:port_handler=slirp4netns  \
+-h datagrid \
 -e USER="${USER_NAME}" \
 -e PASS="${PASSWORD}" \
 --name datagrid-8 \
