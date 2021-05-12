@@ -1,0 +1,11 @@
+export DATABASE_NAME="testing"
+export DATABASE_PASSWORD="password"
+export DATABASE_USER="admin"
+export POSTGRES_PORT="5432"
+
+export PGADMIN_DEFAULT_EMAIL=user@domain.com
+export PGADMIN_DEFAULT_PASSWORD="password"
+export PGADMIN_LISTEN_PORT="5433"
+export STARTUP_WAIT_TIME=60
+
+export EXTERNAL_ENDPOINT="192.168.1.10"

@@ -1,0 +1,5 @@
+export EXTERNAL_ENDPOINT="192.168.1.10"
+export USER_NAME="admin"
+export PASSWORD="password"
+export CONTAINER_IMAGE="registry.redhat.io/datagrid/datagrid-8-rhel8"
+export STARTUP_WAIT_TIME=30

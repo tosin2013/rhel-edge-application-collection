@@ -5,7 +5,7 @@ echo "Building test Container"
 cd  test-container
 podman build -t test-container:${VERSION} .
 
-podman run -it -d  --network rhel-edge  localhost/test-container:${VERSION}   /bin/bash 
+podman run -it -d  --network rhel-edge   --network slirp4netns:port_handler=slirp4netns localhost/test-container:${VERSION}   /bin/bash 
 
 EXEC_COMMAND=$(podman ps | grep test-container | awk '{print $1}')
 

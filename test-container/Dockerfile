@@ -10,4 +10,4 @@ RUN dnf update -y && dnf install -y \
     jq \
     vim 
 
-CMD ["/bin/bash"]
+CMD ["/usr/bin"]

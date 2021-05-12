@@ -1,24 +1,27 @@
-# Edge datagrid
-## WIP 
-RHEL EDGE DEMO with datagrid first push
+# RHEL Edge Application collection
+> This repo a collection of scripts that will deploy aplications for RHEL edge deployments.
 
-![Demo1](images/example-1.gif)
-![Demo2](images/example-2.gif)
+## Tested Against
+```
+$ podman -v 
+podman version 2.2.1
 
-## To-Do's  
-* add ansible playbooks for build-script and generator scripts
-* add script to generate pods yaml files
-* add script to generate systemd-unit files
-* add Ansible tower for pipeline deployment  to remote sites
-* Use  [rhel-edge-automation-arch](https://github.com/redhat-cop/rhel-edge-automation-arch) to build images from current repo
-* Add rootless containers to build-script
-
+$ cat /etc/redhat-release 
+Red Hat Enterprise Linux release 8.3 (Ootpa)
+```
 
 ## Initial Steps
 
 ### Configure System
 **Manual Steps**
-* [Manual Steps](configure-system.md)
+* [Configure RHEL 8 system](configure-system.md)
+
+**Configure sudo user**
+```
+curl -OL https://raw.githubusercontent.com/tosin2013/rhel-edge-datagrid/main/build-scripts/setup-sudo-user.sh
+chmod +x setup-sudo-user.sh
+./setup-sudo-user.sh username
+```
 
 **Automated Steps** 
 ```
@@ -27,41 +30,101 @@ chmod +x configure-system.sh
 ./configure-system.sh
 ```
 
+## To start deploying applications
+
 **Clone Git Repo**
 ```
-git clone https://github.com/tosin2013/rhel-edge-datagrid.git
+git clone https://github.com/tosin2013/rhel-edge-application-collection.git
 ```
+
+**cd into folder**
+```
+cd rhel-edge-application-collection
+```
+
+## Supported Applications 
+### Postgresql and pgadmin4
+
+**Edit Source file:**
+```
+vi build-scripts/applications/postgresql/app_env
+```
+
+**Change EXTERNAL_ENDPOINT**
+*the fqdn or ip may be used*
+```
+export EXTERNAL_ENDPOINT="192.168.1.10"
+or 
+export EXTERNAL_ENDPOINT="rhel-edge.example.com"
+```
+
+**Run build script**
+```
+ ./build-scripts/applications/postgresql/postgresql.sh 
+```
+
 **Build Deployment**
 ```
 cd  edge-datagrid
 ./build-scripts/build.sh 
 ```
 
-**Teardown Deployment**
+### Datagrid
+
+**Edit source file:**
+```
+vi build-scripts/applications/postgresql/app_env
+```
+
+**Change EXTERNAL_ENDPOINT**
+*the fqdn or ip may be used*
+```
+export EXTERNAL_ENDPOINT="192.168.1.10"
+or 
+export EXTERNAL_ENDPOINT="rhel-edge.example.com"
+```
+
+**Run build script**
+```
+./build-scripts/applications/datagrid/datagrid.sh 
+```
+
+### quarkuscoffeeshop-majestic-monolith
+
+**Edit Source file:**
+```
+vi build-scripts/applications/quarkuscoffeeshop-majestic-monolith/app_env
+```
+
+**Change EXTERNAL_ENDPOINT**
+*the fqdn or ip may be used*
+```
+export EXTERNAL_ENDPOINT="192.168.1.10"
+or 
+export EXTERNAL_ENDPOINT="rhel-edge.example.com"
+```
+
+**Run build script**
+```
+ ./build-scripts/applications/quarkuscoffeeshop-majestic-monolith/quarkuscoffeeshop-majestic-monolith.sh 
+```
+
+**Build Deployment**
 ```
 cd  edge-datagrid
-./build-scripts/teardown.sh 
-```
-**Test deployment**
-```
+./build-scripts/build.sh 
 ```
 
-**Container for testing**
+## Teardown all pods
 ```
- ./test-container/build-test-container.sh
-podman run -it -d  --network rhel-edge test-container:v1 /bin/bash 
+cd  edge-datagrid
+./build-scripts/teardown-all-pods.sh
 ```
 
-**To access DATAGRID**
-![Datagrid](images/datagrid.png)
-* from browser hostip:8080
+## Testing container**
 ```
-$ podman port -l
-11222/tcp -> 0.0.0.0:8080
-
-$ curl -I 127.0.0.1:8080
-HTTP/1.1 405 Method Not Allowed
-content-length: 11
+$ ./test-container/build-test-container.sh
+podman run -it -d  --network rhel-edge fedora /bin/bash 
 ```
 
 ## Links: 

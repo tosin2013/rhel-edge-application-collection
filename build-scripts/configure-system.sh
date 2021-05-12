@@ -1,42 +1,31 @@
 #!/bin/bash
 set -xe 
 CHECKLOGGINGUSER=$(whoami)
-if [ ${CHECKLOGGINGUSER} != "root" ];
+if [ ${CHECKLOGGINGUSER} == "root" ];
 then 
-  echo "login as root user to run script."
-  echo "running script as non root is not supported yet"
-  echo "please contribte @ https://github.com/tosin2013/rhel-edge-datagrid"
-  echo "You are currently logged in as $USER"
+  echo "login as sudo user to run script."
+  echo "You are currently logged in as root"
   exit 1
 fi
 
-subscription-manager register
+sudo subscription-manager register
 
-subscription-manager refresh
+sudo subscription-manager refresh
 
-subscription-manager attach --auto
+sudo subscription-manager attach --auto
 
-subscription-manager repos --enable=rhel-8-for-x86_64-appstream-rpms --enable=rhel-8-for-x86_64-baseos-rpms
+sudo subscription-manager repos --enable=rhel-8-for-x86_64-appstream-rpms --enable=rhel-8-for-x86_64-baseos-rpms
 
-dnf module install -y container-tools
-yum install git vim curl wget -y
+sudo dnf module install -y container-tools
+sudo yum install git vim curl wget -y
 
-pip3 install podman-compose
+sudo  pip3 install podman-compose
 
-yum install slirp4netns podman -y
-echo "user.max_user_namespaces=28633" > /etc/sysctl.d/userns.conf
-sysctl -p /etc/sysctl.d/userns.conf
+sudo yum install slirp4netns podman -y
 
-sudo podman network create --driver bridge rhel-edge --subnet 192.168.33.0/24
-podman network inspect rhel-edge  --format '{{(index  .plugins  0).ipam.ranges}}' >/tmp/podmannetwork
-IP=$(cat /tmp/podmannetwork | grep -oE "\b([0-9]{1,3}\.){3}[0-9]{1,3}\b")
-echo $IP
-IP_OCTECT=`echo $IP  | cut -d"." -f1-3`
-echo $IP_OCTECT
-
-sudo tee -a /etc/hosts > /dev/null <<EOT
-${IP_OCTECT}.10 postgresql
-${IP_OCTECT}.11 zookeeper
-${IP_OCTECT}.12 kafka
-${IP_OCTECT}.13 datagrid
+sudo tee -a /etc/sysctl.d/userns.conf > /dev/null <<EOT
+user.max_user_namespaces=28633
 EOT
+sudo sysctl -p /etc/sysctl.d/userns.conf
+
+podman network create --driver bridge rhel-edge --subnet 192.168.33.0/24
