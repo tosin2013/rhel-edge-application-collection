@@ -63,12 +63,6 @@ export EXTERNAL_ENDPOINT="rhel-edge.example.com"
  ./build-scripts/applications/postgresql/postgresql.sh 
 ```
 
-**Build Deployment**
-```
-cd  edge-datagrid
-./build-scripts/build.sh 
-```
-
 ### Datagrid
 
 **Edit source file:**
