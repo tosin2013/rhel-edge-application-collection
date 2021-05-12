@@ -115,7 +115,7 @@ cd  edge-datagrid
 ./build-scripts/teardown-all-pods.sh
 ```
 
-## Testing container**
+## Testing container
 ```
 $ ./test-container/build-test-container.sh
 podman run -it -d  --network rhel-edge fedora /bin/bash 
