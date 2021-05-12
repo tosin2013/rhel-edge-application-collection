@@ -105,15 +105,8 @@ export EXTERNAL_ENDPOINT="rhel-edge.example.com"
  ./build-scripts/applications/quarkuscoffeeshop-majestic-monolith/quarkuscoffeeshop-majestic-monolith.sh 
 ```
 
-**Build Deployment**
-```
-cd  edge-datagrid
-./build-scripts/build.sh 
-```
-
 ## Teardown all pods
 ```
-cd  edge-datagrid
 ./build-scripts/teardown-all-pods.sh
 ```
 
