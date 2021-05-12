@@ -17,7 +17,7 @@ Red Hat Enterprise Linux release 8.3 (Ootpa)
 **Configure sudo user**  
 *run as root*
 ```
-curl -OL https://raw.githubusercontent.com/tosin2013/rhel-edge-datagrid/main/build-scripts/setup-sudo-user.sh
+curl -OL https://raw.githubusercontent.com/tosin2013/rhel-edge-application-collection/main/build-scripts/setup-sudo-user.sh
 chmod +x setup-sudo-user.sh
 ./setup-sudo-user.sh username
 ```
@@ -27,7 +27,7 @@ chmod +x setup-sudo-user.sh
 
 **Automated Steps** 
 ```
-curl -OL https://raw.githubusercontent.com/tosin2013/rhel-edge-datagrid/main/build-scripts/configure-system.sh
+curl -OL https://raw.githubusercontent.com/tosin2013/rhel-edge-application-collection/main/build-scripts/configure-system.sh
 chmod +x configure-system.sh
 ./configure-system.sh
 ```
