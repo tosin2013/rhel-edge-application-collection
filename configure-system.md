@@ -1,57 +1,49 @@
 # Configure system for datagrid
 
+**switch to sudo user**
+
 **Register first, then attach a subscription in the Customer Portal**
 ```
-subscription-manager register
+sudo subscription-manager register
 ```
 
 **Attach a specific subscription through the Customer Portal**
  ```
-subscription-manager refresh
+sudo subscription-manager refresh
 ```
   
 **Attach a subscription from any available that match the system**
 ```
-subscription-manager attach --auto
+sudo subscription-manager attach --auto
 ```
 
 **Register repos for x86**
 ```
-subscription-manager repos --enable=rhel-8-for-x86_64-appstream-rpms --enable=rhel-8-for-x86_64-baseos-rpms
+sudo subscription-manager repos --enable=rhel-8-for-x86_64-appstream-rpms --enable=rhel-8-for-x86_64-baseos-rpms
 ```
 
 **install the container-tools module**
 ```
-dnf module install -y container-tools
-yum install git vim -y
+sudo dnf module install -y container-tools
+sudo yum install git vim -y
 ```
 
 **Install podman compose**
 ```
-pip3 install podman-compose
+sudo pip3 install podman-compose
 ```
 
 
 **Set up for rootless containers**
 ```
-# yum install slirp4netns podman -y
-# echo "user.max_user_namespaces=28633" > /etc/sysctl.d/userns.conf
-# sysctl -p /etc/sysctl.d/userns.conf
+# sudo yum install slirp4netns podman -y
+# sudo tee -a /etc/sysctl.d/userns.conf > /dev/null <<EOT
+user.max_user_namespaces=28633
+EOT
+# sudo sysctl -p /etc/sysctl.d/userns.conf
 ```
 
-**Confiure /etc/hosts**
+**Confiure  rhel-edge podman neetwork**
 ```
 # podman network create --driver bridge rhel-edge --subnet 192.168.33.0/24
-# podman network inspect rhel-edge  --format '{{(index  .plugins  0).ipam.ranges}}' >/tmp/podmannetwork
-# IP=$(cat /tmp/podmannetwork | grep -oE "\b([0-9]{1,3}\.){3}[0-9]{1,3}\b")
-# echo $IP
-# IP_OCTECT=`echo $IP  | cut -d"." -f1-3`
-# echo $IP_OCTECT
-
-# sudo tee -a /etc/hosts > /dev/null <<EOT
-${IP_OCTECT}.10 postgresql  
-${IP_OCTECT}.11 zookeeper
-${IP_OCTECT}.12 kafka
-${IP_OCTECT}.13 datagrid
-EOT
 ```

@@ -13,15 +13,17 @@ Red Hat Enterprise Linux release 8.3 (Ootpa)
 ## Initial Steps
 
 ### Configure System
-**Manual Steps**
-* [Configure RHEL 8 system](configure-system.md)
 
-**Configure sudo user**
+**Configure sudo user**  
+*run as root*
 ```
 curl -OL https://raw.githubusercontent.com/tosin2013/rhel-edge-datagrid/main/build-scripts/setup-sudo-user.sh
 chmod +x setup-sudo-user.sh
 ./setup-sudo-user.sh username
 ```
+
+**Manual Steps**
+* [Configure RHEL 8 system](configure-system.md)
 
 **Automated Steps** 
 ```
