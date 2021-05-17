@@ -5,23 +5,11 @@
 ```
 $ podman -v 
 podman version 2.2.1
-
-$ cat /etc/redhat-release 
-Red Hat Enterprise Linux release 8.3 (Ootpa)
 ```
 
 ## Initial Steps
 
 ### Configure System
-
-**Configure sudo user**  
-*run as root*
-```
-curl -OL https://raw.githubusercontent.com/tosin2013/rhel-edge-application-collection/main/build-scripts/setup-sudo-user.sh
-chmod +x setup-sudo-user.sh
-./setup-sudo-user.sh username
-```
-
 **Manual Steps**
 * [Configure RHEL 8 system](configure-system.md)
 
@@ -45,72 +33,19 @@ cd rhel-edge-application-collection
 ```
 
 ## Supported Applications 
+-------
 ### Postgresql and pgadmin4
+[PostgreSQL](build-scripts/applications/postgresql/README.md) is a powerful, open source object-relational database system with over 30 years of active development that has earned it a strong reputation for reliability, feature robustness, and performance.
 
-**Edit Source file:**
-```
-vi build-scripts/applications/postgresql/app_env
-```
-
-**Change EXTERNAL_ENDPOINT**
-*the fqdn or ip may be used*
-```
-export EXTERNAL_ENDPOINT="192.168.1.10"
-or 
-export EXTERNAL_ENDPOINT="rhel-edge.example.com"
-```
-
-**Run build script**
-```
- ./build-scripts/applications/postgresql/postgresql.sh 
-```
 
 ### Datagrid
-
-**Edit source file:**
-```
-vi build-scripts/applications/postgresql/app_env
-```
-
-**Change EXTERNAL_ENDPOINT**
-*the fqdn or ip may be used*
-```
-export EXTERNAL_ENDPOINT="192.168.1.10"
-or 
-export EXTERNAL_ENDPOINT="rhel-edge.example.com"
-```
-
-**Run build script**
-```
-./build-scripts/applications/datagrid/datagrid.sh 
-```
+[Red Hat Data Grid](build-scripts/applications/datagrid/README.md) Red Hat® Data Grid is an in-memory, distributed, NoSQL datastore solution. Your applications can access, process, and analyze data at in-memory speed to deliver a superior user experience.
 
 ### quarkuscoffeeshop-majestic-monolith
+[ quarkuscoffeeshop-majestic-monolith](build-scripts/applications/quarkuscoffeeshop-majestic-monolith/README.md)
 
-**Edit Source file:**
-```
-vi build-scripts/applications/quarkuscoffeeshop-majestic-monolith/app_env
-```
 
-**Change EXTERNAL_ENDPOINT**
-*the fqdn or ip may be used*
-```
-export EXTERNAL_ENDPOINT="192.168.1.10"
-or 
-export EXTERNAL_ENDPOINT="rhel-edge.example.com"
-```
-
-**Run build script**
-```
- ./build-scripts/applications/quarkuscoffeeshop-majestic-monolith/quarkuscoffeeshop-majestic-monolith.sh 
-```
-
-## Teardown all pods
-```
-./build-scripts/teardown-all-pods.sh
-```
-
-## Testing container
+## Testing container**
 ```
 $ ./test-container/build-test-container.sh
 podman run -it -d  --network rhel-edge fedora /bin/bash 
@@ -123,4 +58,5 @@ podman run -it -d  --network rhel-edge fedora /bin/bash
 * https://developers.redhat.com/blog/2019/01/15/podman-managing-containers-pods/
 * https://pcp.io/docs/lab.containers.html
 * https://catalog.redhat.com/software/containers/rhel8/pcp/5ede9923bed8bd4f99c6d912takinosh
+* https://www.redhat.com/en/blog/examining-container-performance-rhel-8-pcp-and-pdma-podman
 

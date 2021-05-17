@@ -16,8 +16,8 @@ sudo subscription-manager attach --auto
 
 sudo subscription-manager repos --enable=rhel-8-for-x86_64-appstream-rpms --enable=rhel-8-for-x86_64-baseos-rpms
 
-sudo dnf module install -y container-tools 
-sudo yum install git vim curl wget pcp-zeroconf -y
+sudo dnf module install -y container-tools
+sudo yum install git vim curl wget pcp pcp-zeroconf -y
 
 sudo  pip3 install podman-compose
 
@@ -29,5 +29,6 @@ EOT
 sudo sysctl -p /etc/sysctl.d/userns.conf
 
 podman network create --driver bridge rhel-edge --subnet 192.168.33.0/24
+
 
 sudo systemctl enable  pmlogger_daily_report.timer pmlogger_daily_report-poll.timer --now
