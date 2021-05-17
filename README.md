@@ -7,6 +7,13 @@ $ podman -v
 podman version 2.2.1
 ```
 
+## To-Do's  
+* add ansible playbooks for applications and generator scripts
+* add script to generate pods yaml files
+* add script to generate systemd-unit files
+* add Ansible tower for pipeline deployment  to remote sites
+* Use  [rhel-edge-automation-arch](https://github.com/redhat-cop/rhel-edge-automation-arch) to build images from current repo
+
 ## Initial Steps
 
 ### Configure System
