@@ -60,7 +60,7 @@ cd rhel-edge-application-collection
 [ quarkuscoffeeshop-majestic-monolith](build-scripts/applications/quarkuscoffeeshop-majestic-monolith/README.md)
 
 
-## Testing container**
+## Testing container
 ```
 $ ./test-container/build-test-container.sh
 podman run -it -d  --network rhel-edge fedora /bin/bash 
@@ -90,7 +90,7 @@ Follow
 # ./build-images/image-builder.sh 
 ```
 * add the blueprint file to rhel-edge-automation-arch repo  
-*script comming soon*
+*script coming soon*
 ```
 cd $HOME/rhel-edge-automation-arch
 git checkout blueprints
