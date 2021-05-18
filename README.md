@@ -8,7 +8,7 @@ podman version 2.2.1
 ```
 
 ## To-Do's  
-* add ansible playbooks for applications and generator scripts
+* add ansible playbooks for build-script and generator scripts
 * add script to generate pods yaml files
 * add script to generate systemd-unit files
 * add Ansible tower for pipeline deployment  to remote sites
@@ -17,6 +17,14 @@ podman version 2.2.1
 ## Initial Steps
 
 ### Configure System
+**Configure sudo user**  
+*run as root*
+```
+curl -OL https://raw.githubusercontent.com/tosin2013/rhel-edge-application-collection/main/build-scripts/setup-sudo-user.sh
+chmod +x setup-sudo-user.sh
+./setup-sudo-user.sh username
+```
+
 **Manual Steps**
 * [Configure RHEL 8 system](configure-system.md)
 
@@ -58,7 +66,45 @@ $ ./test-container/build-test-container.sh
 podman run -it -d  --network rhel-edge fedora /bin/bash 
 ```
 
+## Teardown all pods
+```
+cd  edge-datagrid
+./build-scripts/teardown-all-pods.sh
+```
+
+## RHEL Edge Image Builder
+*Configure manchine to create builder image (blueprint) script wip*
+```
+#./build-images/image-builder.sh
+```
+Follow 
+[CREATING SYSTEM IMAGES WITH IMAGE BUILDER COMMAND-LINE INTERFACE](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/composing_a_customized_rhel_system_image/creating-system-images-with-composer-command-line-interface_composing-a-customized-rhel-system-image) to create blueprint based of your image.  
+
+
+*Build in OpenShift STILL TESTING*
+* Fork [rhel-edge-automation-arch](https://github.com/redhat-cop/rhel-edge-automation-arch) repo
+* Create kickstart File
+```
+# export GITREPO="https://github.com/tosin2013/rhel-edge-automation-arch.git"
+# export APPNAME=quarkuscoffeeshop-majestic-monolith 
+# ./build-images/image-builder.sh 
+```
+* add the blueprint file to rhel-edge-automation-arch repo  
+*script comming soon*
+```
+cd $HOME/rhel-edge-automation-arch
+git checkout blueprints
+export APPNAME=quarkuscoffeeshop-majestic-monolith 
+mkdir -p quarkuscoffeeshop-majestic-monolith 
+# copy blueprint to directory with the name blueprint.toml
+# add and push to your repo
+```
+
+* Configure rfe pipeline in OpenShift
+
+
 ## Links: 
+* https://developers.redhat.com/blog/2019/05/08/red-hat-enterprise-linux-8-image-builder-building-custom-system-images
 * https://www.redhat.com/sysadmin/compose-podman-pods
 * [ref-docker-compose](https://stephennimmo.com/ref-docker-compose/)
 * https://www.redhat.com/sysadmin/container-networking-podman

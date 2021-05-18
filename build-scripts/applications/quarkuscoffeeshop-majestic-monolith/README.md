@@ -21,14 +21,16 @@ export EXTERNAL_ENDPOINT="rhel-edge.example.com"
  ./build-scripts/applications/quarkuscoffeeshop-majestic-monolith/quarkuscoffeeshop-majestic-monolith.sh 
 ```
 
+**Optional: Generate service file and kickstart file**
+```
+# export GITREPO="https://github.com/username/rhel-edge-automation-arch.git"
+# export APPNAME=quarkuscoffeeshop-majestic-monolith 
+# ./build-images/image-builder.sh 
+```
+
 **Build Deployment**
 ```
 cd  edge-datagrid
 ./build-scripts/build.sh 
 ```
 
-## Teardown all pods
-```
-cd  edge-datagrid
-./build-scripts/teardown-all-pods.sh
-```
