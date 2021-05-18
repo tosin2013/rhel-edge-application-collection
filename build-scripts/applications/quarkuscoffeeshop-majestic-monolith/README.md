@@ -28,9 +28,3 @@ export EXTERNAL_ENDPOINT="rhel-edge.example.com"
 # ./build-images/image-builder.sh 
 ```
 
-**Build Deployment**
-```
-cd  edge-datagrid
-./build-scripts/build.sh 
-```
-
