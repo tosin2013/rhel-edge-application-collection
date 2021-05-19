@@ -1,6 +1,10 @@
 # RHEL Edge Application collection
 > This repo a collection of scripts that will deploy aplications for RHEL edge deployments.
 
+You are here in the Edge Deployment Process
+![You are here](images/oie_HsADv6bxvTw3.png)
+source: (RHEL for Edge: What's new in RHEL 8.4)[https://www.redhat.com/en/blog/rhel-edge-whats-new-rhel-84?sc_cid=701f2000000txokAAA&utm_source=bambu&utm_medium=social&utm_campaign=abm]
+
 ## Tested Against
 ```
 $ podman -v 
