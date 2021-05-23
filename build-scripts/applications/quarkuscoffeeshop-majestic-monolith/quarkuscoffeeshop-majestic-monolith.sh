@@ -14,13 +14,20 @@ podman pod create --name  quarkuscoffeeshop-majestic-monolith  -p ${EXPOSE_PORT}
 
 podman  run -d  \
 --pod=quarkuscoffeeshop-majestic-monolith \
--e USER="admin" \
--e PASS="password" \
+-e PGSQL_URL=${PGSQL_URL} \
+-e PGSQL_USER=${PGSQL_USER} \
+-e PGSQL_PASSWORD=${PGSQL_PASSWORD} \
+-e PGSQL_URL_BARISTA=${PGSQL_URL_BARISTA} \
+-e PGSQL_USER_BARISTA=${PGSQL_USER_BARISTA} \
+-e PGSQL_PASSWORD_BARISTA=${PGSQL_PASSWORD_BARISTA} \
+-e PGSQL_URL_KITCHEN=${PGSQL_URL_KITCHEN} \
+-e PGSQL_USER_KITCHEN=${PGSQL_USER_KITCHEN} \
+-e PGSQL_PASSWORD_KITCHEN=${PGSQL_PASSWORD_KITCHEN} \
 -e CORS_ORIGINS="http://${EXTERNAL_ENDPOINT}" \
--e STREAM_URL="http://${EXTERNAL_ENDPOINT}\dashboard\stream" \
+-e STREAM_URL="http://${EXTERNAL_ENDPOINT}:8080/dashboard/stream" \
 -e STORE_ID="${STORE_ID}" \
 --name quarkuscoffeeshop-majestic-monolith-1 \
-${CONTAINER_IMAGE}
+${CONTAINER_IMAGE}:${CONTAINER_TAG}
 
 # quarkuscoffeeshop-majestic-monolith
 sudo firewall-cmd --add-port=${EXPOSE_PORT}/tcp --zone=internal --permanent

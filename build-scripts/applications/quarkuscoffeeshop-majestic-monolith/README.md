@@ -2,6 +2,18 @@
 ![Quarkus Coffee Shop](https://raw.githubusercontent.com/quarkuscoffeeshop/quarkuscoffeeshop-ansible/master/images/webpage-example.png)
 [quarkuscoffeeshop-majestic-monolith](https://github.com/jeremyrdavis/quarkuscoffeeshop-majestic-monolith)  This project uses Quarkus, the Supersonic Subatomic Java Framework. https://quarkuscoffeeshop.github.io/
 
+## Requirements 
+[PostgreSQL](build-scripts/applications/postgresql/README.md)
+
+**For Ansible deployment see**
+[quarkuscoffeeshop-majestic-monolith](quarkuscoffeeshop-majestic-monolith)
+
+**When Deploying PostgreSQL use the variables**
+```
+export DATABASE_NAME="coffeeshopdb"
+export DATABASE_PASSWORD="redhat-21"
+export DATABASE_USER="coffeeshopuser"
+```
 
 **Edit Source file:**
 ```
@@ -26,5 +38,11 @@ export EXTERNAL_ENDPOINT="rhel-edge.example.com"
 # export GITREPO="https://github.com/username/rhel-edge-automation-arch.git"
 # export APPNAME=quarkuscoffeeshop-majestic-monolith 
 # ./build-images/image-builder.sh 
+```
+
+**Build Deployment**
+```
+cd  edge-datagrid
+./build-scripts/build.sh 
 ```
 

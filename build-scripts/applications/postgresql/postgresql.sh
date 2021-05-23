@@ -41,7 +41,7 @@ podman run   \
 -e PGADMIN_DEFAULT_EMAIL="${PGADMIN_DEFAULT_EMAIL}" \
 -e PGADMIN_DEFAULT_PASSWORD="${PGADMIN_DEFAULT_PASSWORD}" \
 -e PGADMIN_LISTEN_PORT="${PGADMIN_LISTEN_PORT}" \
---name=pgadmin4-1 dpage/pgadmin4:latest
+--name=pgadmin4-1 docker.io/dpage/pgadmin4:latest
 
 sudo firewall-cmd --add-port=${PGADMIN_LISTEN_PORT}/tcp --zone=public --permanent
 sudo firewall-cmd --add-port=${PGADMIN_LISTEN_PORT}/tcp --zone=internal --permanent

@@ -3,13 +3,14 @@
 
 You are here in the Edge Deployment Process
 ![You are here](images/oie_HsADv6bxvTw3.png)
- 
-*Source:* [RHEL for Edge: What's new in RHEL 8.4](https://www.redhat.com/en/blog/rhel-edge-whats-new-rhel-84?sc_cid=701f2000000txokAAA&utm_source=bambu&utm_medium=social&utm_campaign=abm)
 
 ## Tested Against
 ```
 $ podman -v 
-podman version 2.2.1
+podman version 3.0.2-dev
+
+$ cat /etc/redhat-release 
+Red Hat Enterprise Linux release 8.4 (Ootpa)
 ```
 
 ## To-Do's  
@@ -66,6 +67,7 @@ cd rhel-edge-application-collection
 
 
 ## Testing container
+
 ```
 $ ./test-container/build-test-container.sh
 podman run -it -d  --network rhel-edge fedora /bin/bash 
@@ -73,7 +75,7 @@ podman run -it -d  --network rhel-edge fedora /bin/bash
 
 ## Teardown all pods
 ```
-cd  edge-datagrid
+cd  rhel-edge-application-collection
 ./build-scripts/teardown-all-pods.sh
 ```
 
@@ -95,7 +97,7 @@ Follow
 # ./build-images/image-builder.sh 
 ```
 * add the blueprint file to rhel-edge-automation-arch repo  
-*script coming soon*
+*script comming soon*
 ```
 cd $HOME/rhel-edge-automation-arch
 git checkout blueprints
