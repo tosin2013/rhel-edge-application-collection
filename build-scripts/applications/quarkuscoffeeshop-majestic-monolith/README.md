@@ -2,11 +2,17 @@
 ![Quarkus Coffee Shop](https://raw.githubusercontent.com/quarkuscoffeeshop/quarkuscoffeeshop-ansible/master/images/webpage-example.png)
 [quarkuscoffeeshop-majestic-monolith](https://github.com/jeremyrdavis/quarkuscoffeeshop-majestic-monolith)  This project uses Quarkus, the Supersonic Subatomic Java Framework. https://quarkuscoffeeshop.github.io/
 
-## Requirements 
-[PostgreSQL](build-scripts/applications/postgresql/README.md)
 
+
+Ansible Deployments
+--------------------
 **For Ansible deployment see**
 [quarkuscoffeeshop-majestic-monolith](quarkuscoffeeshop-majestic-monolith)
+
+Local Deployments using internal scripts
+----------------------------------------
+### Requirements 
+* [PostgreSQL](build-scripts/applications/postgresql/README.md)
 
 **When Deploying PostgreSQL use the variables**
 ```
