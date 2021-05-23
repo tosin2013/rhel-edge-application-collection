@@ -7,7 +7,7 @@
 Ansible Deployments
 --------------------
 **For Ansible deployment see**
-[quarkuscoffeeshop-majestic-monolith](quarkuscoffeeshop-majestic-monolith)
+[quarkuscoffeeshop-majestic-monolith ansible](https://github.com/tosin2013/quarkuscoffeeshop-majestic-monolith-ansible)
 
 Local Deployments using internal scripts
 ----------------------------------------
