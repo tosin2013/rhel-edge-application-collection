@@ -7,7 +7,7 @@
 Ansible Deployments
 --------------------
 **For Ansible deployment see**
-[quarkuscoffeeshop-majestic-monolith ansible](https://github.com/tosin2013/quarkuscoffeeshop-majestic-monolith-ansible)
+[quarkuscoffeeshop-majestic-monolith](https://github.com/tosin2013/quarkuscoffeeshop-majestic-monolith-ansible)
 
 Local Deployments using internal scripts
 ----------------------------------------
@@ -43,7 +43,7 @@ export EXTERNAL_ENDPOINT="rhel-edge.example.com"
 ```
 # export GITREPO="https://github.com/username/rhel-edge-automation-arch.git"
 # export APPNAME=quarkuscoffeeshop-majestic-monolith 
-# ./build-images/image-builder.sh 
+# ./build-images/generate-kickstart.sh
 ```
 
 **Build Deployment**

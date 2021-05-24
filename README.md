@@ -67,7 +67,6 @@ cd rhel-edge-application-collection
 
 
 ## Testing container
-
 ```
 $ ./test-container/build-test-container.sh
 podman run -it -d  --network rhel-edge fedora /bin/bash 
@@ -94,7 +93,7 @@ Follow
 ```
 # export GITREPO="https://github.com/tosin2013/rhel-edge-automation-arch.git"
 # export APPNAME=quarkuscoffeeshop-majestic-monolith 
-# ./build-images/image-builder.sh 
+# ./build-images/generate-kickstart.sh
 ```
 * add the blueprint file to rhel-edge-automation-arch repo  
 *script comming soon*
