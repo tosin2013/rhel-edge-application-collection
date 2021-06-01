@@ -30,5 +30,15 @@ sudo sysctl -p /etc/sysctl.d/userns.conf
 
 podman network create --driver bridge rhel-edge --subnet 192.168.33.0/24
 
+sudo yum install redis -y
+sudo systemctl start redis
+sudo systemctl enable redis
 
 sudo systemctl enable  pmlogger_daily_report.timer pmlogger_daily_report-poll.timer --now
+
+systemctl restart pmcd pmlogger 
+
+systemctl enable pmproxy
+systemctl start pmproxy
+firewall-cmd --add-service=pmproxy --permanent
+firewall-cmd --reload

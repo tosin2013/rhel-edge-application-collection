@@ -1,5 +1,6 @@
 #!/bin/bash
-set -xe 
+#set -xe 
+
 if [ -d $(pwd)/build-scripts ];
 then 
     source  $(pwd)/build-scripts/applications/functions.sh
@@ -9,17 +10,18 @@ else
 fi 
 
 check-logged-in-user
+enable-pcp
 login-to-registry
 
 
 echo "Building POSTGRESQL_DATABASE container"
-podman pod create --name postgresql -p 5432:5432 --network rhel-edge  --network slirp4netns:port_handler=slirp4netns
+${RUN_AS_SUDO} podman pod create --name postgresql -p 5432:5432 --network rhel-edge  --network slirp4netns:port_handler=slirp4netns
 
 mkdir -p ${HOME}/data
 curl -L https://raw.githubusercontent.com/jeremyrdavis/quarkuscoffeeshop-majestic-monolith/main/init-postgresql.sql  --output /tmp/init-postgresql.sql
 cp /tmp/init-postgresql.sql ${HOME}/data/init-postgresql.sql
 
-podman run   \
+${RUN_AS_SUDO} podman run   \
 -d --restart=always --pod=postgresql \
 -v ${HOME}/data:/data:Z \
 -e POSTGRESQL_DATABASE="${DATABASE_NAME}" \
@@ -29,7 +31,7 @@ podman run   \
 
 echo "waiting  ${STARTUP_WAIT_TIME}s for pod.."
 sleep ${STARTUP_WAIT_TIME}s
-podman exec -i postgresql-1  /bin/bash -c "PGPASSWORD=${DATABASE_PASSWORD} psql --username ${DATABASE_USER} ${DATABASE_NAME} < /data/init-postgresql.sql"
+${RUN_AS_SUDO}  podman exec -i postgresql-1  /bin/bash -c "PGPASSWORD=${DATABASE_PASSWORD} psql --username ${DATABASE_USER} ${DATABASE_NAME} < /data/init-postgresql.sql"
 
 
 sudo firewall-cmd --add-port=5432/tcp --zone=public --permanent
@@ -41,10 +43,10 @@ echo "POSTGRESS EXTERNAL ENDPOINT ${EXTERNAL_ENDPOINT}:5432"
 echo "*****************************************************************"
 
 echo "Building pgadmin4 container"
-podman pod create --name pgadmin4 -p ${PGADMIN_LISTEN_PORT}:${PGADMIN_LISTEN_PORT} --network rhel-edge  --network slirp4netns:port_handler=slirp4netns
+${RUN_AS_SUDO}  podman pod create --name pgadmin4 -p ${PGADMIN_LISTEN_PORT}:${PGADMIN_LISTEN_PORT} --network rhel-edge  --network slirp4netns:port_handler=slirp4netns
 
 sudo mkdir -p /pgadmin4
-podman run   \
+${RUN_AS_SUDO}  podman run   \
 -d --restart=always --pod=pgadmin4 \
 -e PGADMIN_DEFAULT_EMAIL="${PGADMIN_DEFAULT_EMAIL}" \
 -e PGADMIN_DEFAULT_PASSWORD="${PGADMIN_DEFAULT_PASSWORD}" \
@@ -62,3 +64,5 @@ curl -vI  --max-time 5.5   http://${EXTERNAL_ENDPOINT}:${PGADMIN_LISTEN_PORT}
 echo "*****************************************************************"
 echo "Open http://${EXTERNAL_ENDPOINT}:${PGADMIN_LISTEN_PORT} in browser"
 echo "*****************************************************************"
+
+get-pod-status

@@ -58,6 +58,8 @@ cd rhel-edge-application-collection
 ### Postgresql and pgadmin4
 [PostgreSQL](build-scripts/applications/postgresql/README.md) is a powerful, open source object-relational database system with over 30 years of active development that has earned it a strong reputation for reliability, feature robustness, and performance.
 
+### Grafana
+[Grafana](build-scripts/applications/pcp/README.md) is a multi-platform open source analytics and interactive visualization web application.
 
 ### Datagrid
 [Red Hat Data Grid](build-scripts/applications/datagrid/README.md) Red Hat® Data Grid is an in-memory, distributed, NoSQL datastore solution. Your applications can access, process, and analyze data at in-memory speed to deliver a superior user experience.
@@ -116,6 +118,6 @@ mkdir -p quarkuscoffeeshop-majestic-monolith
 * https://www.redhat.com/sysadmin/container-networking-podman
 * https://developers.redhat.com/blog/2019/01/15/podman-managing-containers-pods/
 * https://pcp.io/docs/lab.containers.html
-* https://catalog.redhat.com/software/containers/rhel8/pcp/5ede9923bed8bd4f99c6d912takinosh
 * https://www.redhat.com/en/blog/examining-container-performance-rhel-8-pcp-and-pdma-podman
+* https://www.redhat.com/en/blog/working-linux-containers-rhel-8-podman-image-builder-and-web-console
 

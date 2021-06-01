@@ -9,3 +9,6 @@ export PGADMIN_LISTEN_PORT="5433"
 export STARTUP_WAIT_TIME=60
 
 export EXTERNAL_ENDPOINT="192.168.1.10"
+export ENABLE_PCP=false
+
+export DEBUG_SCRIPT=false

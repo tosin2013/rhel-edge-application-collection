@@ -16,6 +16,15 @@ or
 export EXTERNAL_ENDPOINT="rhel-edge.example.com"
 ```
 
+### Requirements 
+* [Performance Co-Pilot](../../applications/pcp/README.md)  
+> To enable podman performance co-pilot add the variable below.
+```
+export ENABLE_PCP=true
+```
+
+
+
 **Run build script**
 ```
  ./build-scripts/applications/postgresql/postgresql.sh 

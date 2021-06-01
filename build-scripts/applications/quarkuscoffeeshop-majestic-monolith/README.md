@@ -12,7 +12,12 @@ Ansible Deployments
 Local Deployments using internal scripts
 ----------------------------------------
 ### Requirements 
-* [PostgreSQL](build-scripts/applications/postgresql/README.md)
+* [PostgreSQL](../../applications/postgresql/README.md)
+* [Performance Co-Pilot](../../applications/pcp/README.md)  
+> To enable podman performance co-pilot add the variable below.
+```
+export ENABLE_PCP=true
+```
 
 **When Deploying PostgreSQL use the variables**
 ```
@@ -44,11 +49,5 @@ export EXTERNAL_ENDPOINT="rhel-edge.example.com"
 # export GITREPO="https://github.com/username/rhel-edge-automation-arch.git"
 # export APPNAME=quarkuscoffeeshop-majestic-monolith 
 # ./build-images/generate-kickstart.sh
-```
-
-**Build Deployment**
-```
-cd  edge-datagrid
-./build-scripts/build.sh 
 ```
 

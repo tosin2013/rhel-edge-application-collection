@@ -7,12 +7,15 @@ else
    exit 1
 fi 
 
+
+
 check-logged-in-user
+enable-pcp
 
 echo "Building quarkuscoffeeshop-majestic-monolith container"
-podman pod create --name  quarkuscoffeeshop-majestic-monolith  -p ${EXPOSE_PORT}:${EXPOSE_PORT} --network rhel-edge  --network slirp4netns:port_handler=slirp4netns
+${RUN_AS_SUDO} podman pod create --name  quarkuscoffeeshop-majestic-monolith  -p ${EXPOSE_PORT}:${EXPOSE_PORT} --network rhel-edge  --network slirp4netns:port_handler=slirp4netns
 
-podman  run -d  \
+${RUN_AS_SUDO} podman  run -d  \
 --pod=quarkuscoffeeshop-majestic-monolith \
 -e PGSQL_URL=${PGSQL_URL} \
 -e PGSQL_USER=${PGSQL_USER} \
@@ -40,3 +43,5 @@ curl -vI  --max-time 5.5   http://${EXTERNAL_ENDPOINT}:${EXPOSE_PORT} || exit $?
 echo "*****************************************************************"
 echo "Open http://${EXTERNAL_ENDPOINT}:${EXPOSE_PORT} in browser"
 echo "*****************************************************************"
+
+get-pod-status

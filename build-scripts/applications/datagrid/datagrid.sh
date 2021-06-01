@@ -1,5 +1,5 @@
 #!/bin/bash 
-set -xe 
+#set -xe 
 if [ -d $(pwd)/build-scripts ];
 then 
     source  $(pwd)/build-scripts/applications/functions.sh
@@ -44,3 +44,5 @@ curl -vI  --max-time 5.5   http://${EXTERNAL_ENDPOINT}:11222
 echo "*****************************************************************"
 echo "Open http://${EXTERNAL_ENDPOINT}:11222 in browser"
 echo "*****************************************************************"
+
+get-pod-status

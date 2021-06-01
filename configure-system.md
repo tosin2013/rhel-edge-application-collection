@@ -1,4 +1,4 @@
-# Configure system for datagrid
+# Configure system for RHEL Edge Application 
 
 **switch to sudo user**
 
@@ -28,11 +28,22 @@ sudo dnf module install -y container-tools
 sudo yum install git vim -y
 ```
 
+**Install Performance Co-Pilot**
+```
+sudo dnf install git vim curl wget pcp pcp-zeroconf -y
+
+sudo systemctl enable  pmlogger_daily_report.timer pmlogger_daily_report-poll.timer --now
+
+systemctl enable pmproxy
+systemctl start pmproxy
+firewall-cmd --add-service=pmproxy --permanent
+firewall-cmd --reload
+```
+
 **Install podman compose**
 ```
 sudo pip3 install podman-compose
 ```
-
 
 **Set up for rootless containers**
 ```
@@ -43,7 +54,7 @@ EOT
 # sudo sysctl -p /etc/sysctl.d/userns.conf
 ```
 
-**Confiure  rhel-edge podman neetwork**
+**Confiure  rhel-edge podman network**
 ```
 # podman network create --driver bridge rhel-edge --subnet 192.168.33.0/24
 ```

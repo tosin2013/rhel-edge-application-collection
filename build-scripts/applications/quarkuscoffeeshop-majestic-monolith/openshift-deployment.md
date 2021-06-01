@@ -7,6 +7,8 @@
 # ./build-images/generate-kickstart.sh
 ```
 
+
+
 **Get the tekton cli**
 ```
 curl -LO https://github.com/tektoncd/cli/releases/download/v0.17.0/tkn_0.17.0_Linux_x86_64.tar.gz

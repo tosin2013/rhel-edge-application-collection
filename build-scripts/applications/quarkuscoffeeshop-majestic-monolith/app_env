@@ -13,3 +13,4 @@ export PGSQL_PASSWORD_BARISTA="redhat-21" \
 export PGSQL_URL_KITCHEN="jdbc:postgresql://${EXTERNAL_ENDPOINT}:5432/coffeeshopdb?currentSchema=kitchen" \
 export PGSQL_USER_KITCHEN="coffeeshopuser" \
 export PGSQL_PASSWORD_KITCHEN="redhat-21"
+export ENABLE_PCP=false
