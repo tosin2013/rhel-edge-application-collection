@@ -41,12 +41,15 @@ export ENABLE_PCP=true
 *Enable performance co-pilot*  
 ![grafana3.png](../../../images/grafana3.png)
 
-*Add PCP Vector as datacource*  
+*Add PCP Vector as datasource*  
 ![grafana4.png](../../../images/grafana4.png)
 ![grafana5.png](../../../images/grafana5.png)
 
 *Add `http://your-ip-address:44322` under url and save*  
 ![grafana6.png](../../../images/grafana6.png)
+ 
+*Import `PCP Vector: Container Overview (CGroups v1)`*
+![grafana7.png](../../../images/grafana7.png)
 
 **You an now view dashboards**  
 ![Grafana](../../../images/dashboards.png)  
