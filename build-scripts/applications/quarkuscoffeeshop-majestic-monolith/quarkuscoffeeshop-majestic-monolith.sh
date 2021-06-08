@@ -11,12 +11,14 @@ fi
 
 check-logged-in-user
 enable-pcp
+auto-updatecontainer
 
 echo "Building quarkuscoffeeshop-majestic-monolith container"
 ${RUN_AS_SUDO} podman pod create --name  quarkuscoffeeshop-majestic-monolith  -p ${EXPOSE_PORT}:${EXPOSE_PORT} --network rhel-edge  --network slirp4netns:port_handler=slirp4netns
 
 ${RUN_AS_SUDO} podman  run -d  \
 --pod=quarkuscoffeeshop-majestic-monolith \
+ ${AUTO_UPDATE} \
 -e PGSQL_URL=${PGSQL_URL} \
 -e PGSQL_USER=${PGSQL_USER} \
 -e PGSQL_PASSWORD=${PGSQL_PASSWORD} \
@@ -36,6 +38,14 @@ ${CONTAINER_IMAGE}:${CONTAINER_TAG}
 sudo firewall-cmd --add-port=${EXPOSE_PORT}/tcp --zone=internal --permanent
 sudo firewall-cmd --add-port=${EXPOSE_PORT}/tcp --zone=public --permanent
 sudo firewall-cmd --reload
+
+if [ ${AUTOUPDATE_CONTAINER} == "true" ];
+then
+    ${RUN_AS_SUDO} podman generate systemd --new  quarkuscoffeeshop-majestic-monolith-1 > quarkuscoffeeshop-majestic-monolith.service
+    ${RUN_AS_SUDO} cp quarkuscoffeeshop-majestic-monolith.service  /etc/systemd/system/
+    ${RUN_AS_SUDO} systemctl daemon-reload
+    ${RUN_AS_SUDO} systemctl start quarkuscoffeeshop-majestic-monolith
+fi
 
 echo "waiting  ${STARTUP_WAIT_TIME}s for pod.."
 sleep ${STARTUP_WAIT_TIME}s

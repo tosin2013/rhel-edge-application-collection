@@ -74,6 +74,12 @@ $ ./test-container/build-test-container.sh
 podman run -it -d  --network rhel-edge fedora /bin/bash 
 ```
 
+## Teardown single pod
+```
+cd  rhel-edge-application-collection
+./build-scripts/teardown-pod.sh
+```
+
 ## Teardown all pods
 ```
 cd  rhel-edge-application-collection

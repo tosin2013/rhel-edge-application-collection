@@ -39,6 +39,14 @@ or
 export EXTERNAL_ENDPOINT="rhel-edge.example.com"
 ```
 
+**Enable podman auto-update function**
+[podman-auto-update](http://docs.podman.io/en/latest/markdown/podman-auto-update.1.html#:~:text=podman%20auto%2Dupdate%20looks%20up,the%20image%20has%20been%20updated.)
+```
+export AUTOUPDATE_CONTAINER=true
+export CONTAINER_TAG="latest"
+```
+
+
 **Run build script**
 ```
  ./build-scripts/applications/quarkuscoffeeshop-majestic-monolith/quarkuscoffeeshop-majestic-monolith.sh 
@@ -51,3 +59,9 @@ export EXTERNAL_ENDPOINT="rhel-edge.example.com"
 # ./build-images/generate-kickstart.sh
 ```
 
+
+### Podman auto update steps
+1. Update image to latest in quay registry
+2. run the podman auto-update command 
+3. Verify image has been updated
+![podman auto-update](images/podman-auto-update.gif)

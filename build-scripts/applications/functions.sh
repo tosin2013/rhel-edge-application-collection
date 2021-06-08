@@ -23,6 +23,14 @@ function enable-pcp(){
     fi
 }
 
+function auto-updatecontainer(){
+    if [ ${AUTOUPDATE_CONTAINER} == "true" ];
+    then
+        AUTO_UPDATE='--label "io.containers.autoupdate=image"'
+    fi
+}
+
+
 function get-pod-status(){
     echo "*****************************************************************"
     echo "to check status of pods and containers run the following commands"
