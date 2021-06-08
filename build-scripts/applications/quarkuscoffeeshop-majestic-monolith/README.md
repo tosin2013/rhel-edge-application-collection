@@ -64,4 +64,4 @@ export CONTAINER_TAG="latest"
 1. Update image to latest in quay registry
 2. run the podman auto-update command 
 3. Verify image has been updated
-![podman auto-update](images/podman-auto-update.gif)
+![podman auto-update](../../../images/podman-auto-update.gif)
