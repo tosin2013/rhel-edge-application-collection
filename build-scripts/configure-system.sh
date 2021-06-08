@@ -36,9 +36,9 @@ sudo systemctl enable redis
 
 sudo systemctl enable  pmlogger_daily_report.timer pmlogger_daily_report-poll.timer --now
 
-systemctl restart pmcd pmlogger 
+sudo systemctl restart pmcd pmlogger 
 
-systemctl enable pmproxy
-systemctl start pmproxy
-firewall-cmd --add-service=pmproxy --permanent
-firewall-cmd --reload
+sudo systemctl enable pmproxy
+sudo systemctl start pmproxy
+sudo firewall-cmd --add-service=pmproxy --permanent
+sudo firewall-cmd --reload
