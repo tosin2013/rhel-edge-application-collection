@@ -1,5 +1,5 @@
 # RHEL Edge Application collection
-> This repo a collection of scripts that will deploy aplications for RHEL edge deployments.
+> This repo a collection of scripts that will deploy applications for RHEL edge deployments.
 
 You are here in the Edge Deployment Process
 ![You are here](images/oie_HsADv6bxvTw3.png)
