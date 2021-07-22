@@ -3,7 +3,7 @@
 
 **Edit source file:**
 ```
-vi build-scripts/applications/postgresql/app_env
+vi build-scripts/applications/datagrid/app_env
 ```
 
 **Change EXTERNAL_ENDPOINT**
