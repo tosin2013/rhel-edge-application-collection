@@ -15,3 +15,4 @@ export PGSQL_USER_KITCHEN="coffeeshopuser" \
 export PGSQL_PASSWORD_KITCHEN="redhat-21"
 export ENABLE_PCP=false
 export AUTOUPDATE_CONTAINER=false
+export HOMEOFFICE_URL=http://homeoffice-ingress
