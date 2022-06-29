@@ -15,7 +15,7 @@ enable-pcp
 login-to-registry
 
 echo "Building grafana container"
-${RUN_AS_SUDO} podman pod create --name grafana -p ${LISTEN_PORT}:${LISTEN_PORT} --network rhel-edge  --network slirp4netns:port_handler=slirp4netns
+${RUN_AS_SUDO} podman pod create --name grafana -p ${LISTEN_PORT}:${LISTEN_PORT} --network rhel-edge 
 
 
 ${RUN_AS_SUDO} podman run   \

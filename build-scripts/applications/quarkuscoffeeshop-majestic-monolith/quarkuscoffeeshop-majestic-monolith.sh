@@ -14,8 +14,7 @@ enable-pcp
 auto-updatecontainer
 
 echo "Building quarkuscoffeeshop-majestic-monolith container"
-${RUN_AS_SUDO} podman pod create --name  quarkuscoffeeshop-majestic-monolith  -p ${EXPOSE_PORT}:${EXPOSE_PORT} --network rhel-edge  --network slirp4netns:port_handler=slirp4netns
-
+${RUN_AS_SUDO} podman pod create --name  quarkuscoffeeshop-majestic-monolith  -p ${EXPOSE_PORT}:${EXPOSE_PORT} --network rhel-edge 
 ${RUN_AS_SUDO} podman  run -d  \
 --pod=quarkuscoffeeshop-majestic-monolith \
  ${AUTO_UPDATE} \

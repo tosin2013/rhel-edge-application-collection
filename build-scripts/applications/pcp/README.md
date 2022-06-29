@@ -9,9 +9,9 @@ vi build-scripts/applications/pcp/app_env
 ```
 
 **Change EXTERNAL_ENDPOINT**
-*the fqdn or ip may be used*
+*the fqdn or ip  of machine may be used*
 ```
-export EXTERNAL_ENDPOINT="192.168.1.10"
+export EXTERNAL_ENDPOINT="192.168.1.10" or sed -i "s/192.168.1.10/$(hostname -I | awk '{print $1}')/g"  build-scripts/applications/pcp/app_env
 or 
 export EXTERNAL_ENDPOINT="rhel-edge.example.com"
 ```

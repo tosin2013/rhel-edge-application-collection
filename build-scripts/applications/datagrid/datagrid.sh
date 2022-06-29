@@ -25,7 +25,7 @@ echo "Building DATAGRID container"
 #${CONTAINER_IMAGE}
 
 ${RUN_AS_SUDO} podman  run  \
--d  -p 11222:11222 --net rhel-edge  --network slirp4netns:port_handler=slirp4netns  \
+-d  -p 11222:11222 --net rhel-edge   \
 -h datagrid \
 -e USER="${USER_NAME}" \
 -e PASS="${PASSWORD}" \
