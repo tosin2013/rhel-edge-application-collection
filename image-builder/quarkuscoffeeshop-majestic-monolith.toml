@@ -1,0 +1,42 @@
+name = "quarkuscoffeeshop-majestic-monolith"
+description = "https://github.com/tosin2013/rhel-edge-application-collection"
+version = "0.0.2"
+modules = []
+groups = []
+distro = ""
+
+[[packages]]
+name = "pcp"
+version = "*"
+
+[[packages]]
+name = "pcp-zeroconf"
+version = "*"
+
+[[packages]]
+name = "curl"
+version = "*"
+
+[[packages]]
+name = "vim-minimal"
+version = "*"
+
+[[packages]]
+name = "podman"
+version = "*"
+
+[[packages]]
+name = "slirp4netns"
+version = "*"
+
+[[packages]]
+name = "redis"
+version = "*"
+
+[customizations]
+
+[[customizations.user]]
+name = "admin"
+description = "admin"
+password = ""
+key = "PUBLIC_KEY"

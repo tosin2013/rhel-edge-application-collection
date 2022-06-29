@@ -96,6 +96,7 @@ cd  rhel-edge-application-collection
 Follow 
 [CREATING SYSTEM IMAGES WITH IMAGE BUILDER COMMAND-LINE INTERFACE](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/composing_a_customized_rhel_system_image/creating-system-images-with-composer-command-line-interface_composing-a-customized-rhel-system-image) to create blueprint based of your image.  
 
+**Build on Single node**
 
 *Build in OpenShift STILL TESTING*
 * Fork [rhel-edge-automation-arch](https://github.com/redhat-cop/rhel-edge-automation-arch) repo

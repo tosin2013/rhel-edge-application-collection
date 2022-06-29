@@ -56,10 +56,11 @@ export CONTAINER_TAG="latest"
 ```
 
 **Optional: Generate service file and kickstart file**
+> See Example: [kickstart-example.ks](kickstart-example.ks)
 ```
 # export GITREPO="https://github.com/username/rhel-edge-automation-arch.git"
 # export APPNAME=quarkuscoffeeshop-majestic-monolith 
-# ./build-images/generate-kickstart.sh
+# ./build-scripts/generate-kickstart.sh
 ```
 
 
