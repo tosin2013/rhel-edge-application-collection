@@ -27,5 +27,8 @@ yum install composer-cli
  composer-cli blueprints push  quarkuscoffeeshop-majestic-monolith.toml
 ```
 
+## TESTING: 
+> [kickstart.ks](kickstart.ks)
+
 # Links: 
 * https://github.com/osbuild/rhel-for-edge-demo

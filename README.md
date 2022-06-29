@@ -16,7 +16,7 @@ Red Hat Enterprise Linux release 8.5 (Ootpa)
 ```
 
 ## To-Do's  
-* add ansible playbooks for build-script and generator scripts
+* add ansible playbooks for build-script and generator scripts [quarkuscoffeeshop-majestic-monolith tower role](https://github.com/tosin2013/quarkuscoffeeshop-majestic-monolith-ansible)
 * add script to generate pods yaml files
 * add script to generate systemd-unit files
 * add Ansible tower for pipeline deployment  to remote sites
