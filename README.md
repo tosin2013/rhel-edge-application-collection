@@ -4,12 +4,12 @@
 You are here in the Edge Deployment Process
 ![You are here](images/oie_HsADv6bxvTw3.png)
  
-*Source:* [RHEL for Edge: What's new in RHEL 8.4](https://www.redhat.com/en/blog/rhel-edge-whats-new-rhel-84?sc_cid=701f2000000txokAAA&utm_source=bambu&utm_medium=social&utm_campaign=abm)
+*Source:* [RHEL for Edge: What's new in RHEL 8.5]https://www.redhat.com/en/blog/whats-new-rhel-85)
 
 ## Tested Against
 ```
 $ podman -v 
-podman version 2.2.1
+podman version 4.0.2
 ```
 
 ## To-Do's  
