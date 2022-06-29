@@ -1,5 +1,18 @@
 export EXTERNAL_ENDPOINT="192.168.1.10"
 export EXPOSE_PORT="8080"
-export STORE_ID="rhel-edge1"
-export CONTAINER_IMAGE="jeremydavis/quarkuscoffeeshop-majestic-monolith-jvm"
+export STORE_ID="ATLANTA"
+export CONTAINER_IMAGE="quay.io/quarkuscoffeeshop/quarkuscoffeeshop-majestic-monolith"
+export CONTAINER_TAG="v0.0.2"
 export STARTUP_WAIT_TIME=30
+export PGSQL_URL="jdbc:postgresql://${EXTERNAL_ENDPOINT}:5432/coffeeshopdb?currentSchema=coffeeshop" \
+export PGSQL_USER="coffeeshopuser" \
+export PGSQL_PASSWORD="redhat-21" \
+export PGSQL_URL_BARISTA="jdbc:postgresql://${EXTERNAL_ENDPOINT}:5432/coffeeshopdb?currentSchema=barista" \
+export PGSQL_USER_BARISTA="coffeeshopuser" \
+export PGSQL_PASSWORD_BARISTA="redhat-21" \
+export PGSQL_URL_KITCHEN="jdbc:postgresql://${EXTERNAL_ENDPOINT}:5432/coffeeshopdb?currentSchema=kitchen" \
+export PGSQL_USER_KITCHEN="coffeeshopuser" \
+export PGSQL_PASSWORD_KITCHEN="redhat-21"
+export ENABLE_PCP=false
+export AUTOUPDATE_CONTAINER=false
+export HOMEOFFICE_URL=http://homeoffice-ingress

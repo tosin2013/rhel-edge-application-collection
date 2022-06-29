@@ -1,5 +1,5 @@
 # RHEL Edge Application collection
-> This repo a collection of scripts that will deploy aplications for RHEL edge deployments.
+> This repo a collection of scripts that will deploy applications for RHEL edge deployments.
 
 You are here in the Edge Deployment Process
 ![You are here](images/oie_HsADv6bxvTw3.png)
@@ -10,6 +10,9 @@ You are here in the Edge Deployment Process
 ```
 $ podman -v 
 podman version 4.0.2
+
+$ cat /etc/redhat-release 
+Red Hat Enterprise Linux release 8.5 (Ootpa)
 ```
 
 ## To-Do's  
@@ -57,6 +60,8 @@ cd rhel-edge-application-collection
 ### Postgresql and pgadmin4
 [PostgreSQL](build-scripts/applications/postgresql/README.md) is a powerful, open source object-relational database system with over 30 years of active development that has earned it a strong reputation for reliability, feature robustness, and performance.
 
+### Grafana
+[Grafana](build-scripts/applications/pcp/README.md) is a multi-platform open source analytics and interactive visualization web application.
 
 ### Datagrid
 [Red Hat Data Grid](build-scripts/applications/datagrid/README.md) Red Hat® Data Grid is an in-memory, distributed, NoSQL datastore solution. Your applications can access, process, and analyze data at in-memory speed to deliver a superior user experience.
@@ -71,9 +76,15 @@ $ ./test-container/build-test-container.sh
 podman run -it -d  --network rhel-edge fedora /bin/bash 
 ```
 
+## Teardown single pod
+```
+cd  rhel-edge-application-collection
+./build-scripts/teardown-pod.sh
+```
+
 ## Teardown all pods
 ```
-cd  edge-datagrid
+cd  rhel-edge-application-collection
 ./build-scripts/teardown-all-pods.sh
 ```
 
@@ -92,10 +103,10 @@ Follow
 ```
 # export GITREPO="https://github.com/tosin2013/rhel-edge-automation-arch.git"
 # export APPNAME=quarkuscoffeeshop-majestic-monolith 
-# ./build-images/image-builder.sh 
+# ./build-images/generate-kickstart.sh
 ```
 * add the blueprint file to rhel-edge-automation-arch repo  
-*script coming soon*
+*script comming soon*
 ```
 cd $HOME/rhel-edge-automation-arch
 git checkout blueprints
@@ -115,6 +126,6 @@ mkdir -p quarkuscoffeeshop-majestic-monolith
 * https://www.redhat.com/sysadmin/container-networking-podman
 * https://developers.redhat.com/blog/2019/01/15/podman-managing-containers-pods/
 * https://pcp.io/docs/lab.containers.html
-* https://catalog.redhat.com/software/containers/rhel8/pcp/5ede9923bed8bd4f99c6d912takinosh
 * https://www.redhat.com/en/blog/examining-container-performance-rhel-8-pcp-and-pdma-podman
+* https://www.redhat.com/en/blog/working-linux-containers-rhel-8-podman-image-builder-and-web-console
 
