@@ -1,4 +1,4 @@
-# Build quarkuscoffeeshop-majestic-monolith on singlenode box 
+# Build quarkuscoffeeshop-majestic-monolith on singlenode box - WIP
 
 # Requirements
 
@@ -10,10 +10,19 @@ Red Hat Enterprise Linux release 8.6 (Ootpa)
 
 **Install the following packages**
 ```
-sudo yum install -y osbuild-composer cockpit-composer lorax
+sudo yum install -y osbuild-composer cockpit-composer lorax skopeo
 sudo systemctl enable --now osbuild-composer.socket
 sudo systemctl enable --now cockpit.socket
 sudo yum install composer-cli -y
+```
+
+**Optional: Set up for rootless containers for repo**
+```
+# sudo yum install slirp4netns podman -y
+# sudo tee -a /etc/sysctl.d/userns.conf > /dev/null <<EOT
+user.max_user_namespaces=28633
+EOT
+# sudo sysctl -p /etc/sysctl.d/userns.conf
 ```
 
 **Access console URL**
@@ -34,10 +43,11 @@ cd rhel-edge-application-collection/image-builder
 * description = "admin"
 * replace key = "PUBLIC_KEY" 
 
-## Push the quarkuscoffeeshop-majestic-monolith.toml to macbhine
+## Push the quarkuscoffeeshop-majestic-monolith.toml to machine
 ```
 sudo composer-cli blueprints push  quarkuscoffeeshop-majestic-monolith.toml
 ```
+
 **review quarkuscoffeeshop-majestic-monolith configuration under Image Builder**
 ![20220629190623](https://i.imgur.com/AXvXJKg.png)
 
@@ -48,8 +58,39 @@ sudo composer-cli blueprints push  quarkuscoffeeshop-majestic-monolith.toml
 **Different types off images that can be created**
 ![20220629203113](https://i.imgur.com/xzb0w7P.png)
 
+
+**Create Image iso file for via CLI**
+```
+sudo composer-cli compose start quarkuscoffeeshop-majestic-monolith image-installer
+sudo composer-cli compose status
+sudo composer-cli compose image image-uuid
+```
+
+**Create Image tar file for repo**
+```
+sudo composer-cli compose types
+sudo composer-cli compose start quarkuscoffeeshop-majestic-monolith rhel-edge-container
+sudo composer-cli compose image 
+sudo skopeo copy oci-archive:9ce44eef-5544-4262-8316-e59bd1d49c6c-container.tar containers-storage:localhost/rfe-mirror:9ce44eef-5544-4262-8316-e59bd1d49c6c
+sudo podman run -d --restart=always -p 8000:8080 -v $(pwd)/quarkuscoffeeshop-majestic-monolith.ks:/var/www/html/quarkuscoffeeshop-majestic-monolith.ks:Z rfe-mirror:9ce44eef-5544-4262-8316-e59bd1d49c6c
+
+```
+
+
+
+sudo firewall-cmd --add-port=8000/tcp --zone=internal --permanent
+sudo firewall-cmd --add-port=8000/tcp --zone=public --permanent
+sudo firewall-cmd --reload
+
 ## TESTING: 
 > [kickstart.ks](kickstart.ks)
+* `cp kickstart.ks quarkuscoffeeshop-majestic-monolith.ks`
+* Change 10.0.2.2 to your repo server
+* copy quarkuscoffeeshop-majestic-monolith.ks to your repo server 
+
+
+
+sudo mkksiso quarkuscoffeeshop-majestic-monolith.ks 9e902929-46d7-4095-94a3-ab82c37c632d-installer.iso quarkuscoffeeshop-majestic-monolith.iso
 
 # Links: 
 * https://github.com/osbuild/rhel-for-edge-demo

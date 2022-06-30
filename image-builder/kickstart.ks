@@ -21,20 +21,27 @@ text
 # activate network devices and configure with DHCP
 network --bootproto=dhcp
 
+
 # create default user with sudo privileges
-# user --name={{ rfe_user | default('core') }} --groups=wheel --password={{ rfe_password | default('edge') }}
+user --name=core --groups=wheel --password=edge
 
 # set up the OSTree-based install with disabled GPG key verification, the base
 # URL to pull the installation content, 'rhel' as the management root in the
 # repo, and 'rhel/8/x86_64/edge' as the branch for the installation
-# ostreesetup --nogpg --url={{ rfe_tarball_url }}/repo/ --osname=rhel --remote=edge --ref=rhel/8/x86_64/edge
+ostreesetup --nogpg --url=http://10.0.2.2:8000/repo/ --osname=rhel --remote=edge --ref=rhel/8/x86_64/edge
 
 %post
+
+mkdir -p /home/admin/data
+curl -L https://raw.githubusercontent.com/jeremyrdavis/quarkuscoffeeshop-majestic-monolith/main/init-postgresql.sql  --output /tmp/init-postgresql.sql
+cp /tmp/init-postgresql.sql /home/admin/data/init-postgresql.sql
 
 # Set the update policy to automatically download and stage updates to be
 # applied at the next reboot
 #stage updates as they become available. This is highly recommended
 echo AutomaticUpdatePolicy=stage >> /etc/rpm-ostreed.conf
+
+# IP_ADDRESS=$(hostname -I | awk '{print $1}')
 
 cat > /etc/systemd/system/postgresql.service << 'EOF'
 # container-postgresql-1.service
@@ -114,7 +121,7 @@ Environment=PODMAN_SYSTEMD_UNIT=%n
 Restart=on-failure
 TimeoutStopSec=70
 ExecStartPre=/bin/rm -f %t/%n.ctr-id
-ExecStart=/usr/bin/podman run --cidfile=%t/%n.ctr-id --cgroups=no-conmon --rm --pod-id-file %t/pod-quarkuscoffeeshop-majestic-monolith.pod-id --sdnotify=conmon --replace -d -e PGSQL_URL=jdbc:postgresql://10.0.0.207:5432/coffeeshopdb?currentSchema=coffeeshop -e PGSQL_USER=coffeeshopuser -e PGSQL_PASSWORD=redhat-21 -e PGSQL_URL_BARISTA=jdbc:postgresql://10.0.0.207:5432/coffeeshopdb?currentSchema=barista -e PGSQL_USER_BARISTA=coffeeshopuser -e PGSQL_PASSWORD_BARISTA=redhat-21 -e PGSQL_URL_KITCHEN=jdbc:postgresql://10.0.0.207:5432/coffeeshopdb?currentSchema=kitchen -e PGSQL_USER_KITCHEN=coffeeshopuser -e PGSQL_PASSWORD_KITCHEN=redhat-21 -e CORS_ORIGINS=http://10.0.0.207 -e STREAM_URL=http://10.0.0.207:8080/dashboard/stream -e STORE_ID=ATLANTA --name quarkuscoffeeshop-majestic-monolith-1 quay.io/quarkuscoffeeshop/quarkuscoffeeshop-majestic-monolith:v0.0.2
+ExecStart=/usr/bin/podman run --cidfile=%t/%n.ctr-id --cgroups=no-conmon --rm --pod-id-file %t/pod-quarkuscoffeeshop-majestic-monolith.pod-id --sdnotify=conmon --replace -d -e PGSQL_URL=jdbc:postgresql://127.0.0.1:5432/coffeeshopdb?currentSchema=coffeeshop -e PGSQL_USER=coffeeshopuser -e PGSQL_PASSWORD=redhat-21 -e PGSQL_URL_BARISTA=jdbc:postgresql://127.0.0.1:5432/coffeeshopdb?currentSchema=barista -e PGSQL_USER_BARISTA=coffeeshopuser -e PGSQL_PASSWORD_BARISTA=redhat-21 -e PGSQL_URL_KITCHEN=jdbc:postgresql://127.0.0.1:5432/coffeeshopdb?currentSchema=kitchen -e PGSQL_USER_KITCHEN=coffeeshopuser -e PGSQL_PASSWORD_KITCHEN=redhat-21 -e CORS_ORIGINS=http://127.0.0.1 -e STREAM_URL=http://127.0.0.1:8080/dashboard/stream -e STORE_ID=ATLANTA --name quarkuscoffeeshop-majestic-monolith-1 quay.io/quarkuscoffeeshop/quarkuscoffeeshop-majestic-monolith:v0.0.2
 ExecStop=/usr/bin/podman stop --ignore --cidfile=%t/%n.ctr-id
 ExecStopPost=/usr/bin/podman rm -f --ignore --cidfile=%t/%n.ctr-id
 Type=notify
