@@ -96,5 +96,11 @@ sudo firewall-cmd --reload
 sudo mkksiso quarkuscoffeeshop-majestic-monolith.ks image-uuid-installer.iso quarkuscoffeeshop-majestic-monolith.iso
 ```
 
+## For Developers 
+> Setup devbox [Setup image builder server](dev-enviornment.md)
+```
+.hack/create-kvm-vms.sh
+```
+
 # Links: 
 * https://github.com/osbuild/rhel-for-edge-demo

@@ -30,7 +30,7 @@ user --name=core --groups=wheel --password=edge
 # repo, and 'rhel/8/x86_64/edge' as the branch for the installation
 ostreesetup --nogpg --url=http://10.0.2.2:8000/repo/ --osname=rhel --remote=edge --ref=rhel/8/x86_64/edge
 
-%post
+%post --log=/root/admin-ks.log
 
 mkdir -p /home/admin/data
 curl -L https://raw.githubusercontent.com/jeremyrdavis/quarkuscoffeeshop-majestic-monolith/main/init-postgresql.sql  --output /tmp/init-postgresql.sql
