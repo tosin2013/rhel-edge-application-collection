@@ -70,17 +70,19 @@ sudo composer-cli compose image image-uuid
 ```
 sudo composer-cli compose types
 sudo composer-cli compose start quarkuscoffeeshop-majestic-monolith rhel-edge-container
-sudo composer-cli compose image 
-sudo skopeo copy oci-archive:9ce44eef-5544-4262-8316-e59bd1d49c6c-container.tar containers-storage:localhost/rfe-mirror:9ce44eef-5544-4262-8316-e59bd1d49c6c
-sudo podman run -d --restart=always -p 8000:8080 -v $(pwd)/quarkuscoffeeshop-majestic-monolith.ks:/var/www/html/quarkuscoffeeshop-majestic-monolith.ks:Z rfe-mirror:9ce44eef-5544-4262-8316-e59bd1d49c6c
+sudo composer-cli compose status
+sudo composer-cli compose image  image-uuid
+sudo skopeo copy oci-archive:image-uuid-container.tar containers-storage:localhost/rfe-mirror:image-uuid
+sudo podman run -d --restart=always -p 8000:8080 -v $(pwd)/quarkuscoffeeshop-majestic-monolith.ks:/var/www/html/quarkuscoffeeshop-majestic-monolith.ks:Z rfe-mirror:image-uuid
 
 ```
 
-
-
+**Set firewall for coontainer**
+```
 sudo firewall-cmd --add-port=8000/tcp --zone=internal --permanent
 sudo firewall-cmd --add-port=8000/tcp --zone=public --permanent
 sudo firewall-cmd --reload
+```
 
 ## TESTING: 
 > [kickstart.ks](kickstart.ks)
@@ -89,8 +91,10 @@ sudo firewall-cmd --reload
 * copy quarkuscoffeeshop-majestic-monolith.ks to your repo server 
 
 
-
-sudo mkksiso quarkuscoffeeshop-majestic-monolith.ks 9e902929-46d7-4095-94a3-ab82c37c632d-installer.iso quarkuscoffeeshop-majestic-monolith.iso
+**Create iso with custom kickstart**
+```
+sudo mkksiso quarkuscoffeeshop-majestic-monolith.ks image-uuid-installer.iso quarkuscoffeeshop-majestic-monolith.iso
+```
 
 # Links: 
 * https://github.com/osbuild/rhel-for-edge-demo

@@ -33,6 +33,10 @@ version = "*"
 name = "redis"
 version = "*"
 
+[[packages]]
+name = "git"
+version = "*"
+
 [customizations]
 
 [[customizations.user]]
