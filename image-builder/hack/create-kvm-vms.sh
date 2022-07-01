@@ -79,7 +79,7 @@ while [ $LOOP_ON = "true" ]; do
       exit 0
     else
         echo "waiting for  ${IMAGE_NAME}-${DEV_VM_NAME}..."
-        sleep 60s
+        sleep 120s
     fi 
 
   done < <(printf '%s' "${currentPoweredOffVMs}")

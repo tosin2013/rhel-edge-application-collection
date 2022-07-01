@@ -1,5 +1,11 @@
 #!/bin/bash 
-if [ -d $(pwd)/build-scripts ];
+
+if [ -f $(pwd)/app_env ] ; 
+then
+    set -xe 
+    source $(pwd)/app_env
+    source  $(pwd)/build-scripts/applications/functions.sh
+elif [ -d $(pwd)/build-scripts ];
 then 
     source  $(pwd)/build-scripts/applications/functions.sh
     source  $(pwd)/build-scripts/applications/quarkuscoffeeshop-majestic-monolith/app_env
@@ -7,10 +13,15 @@ else
    exit 1
 fi 
 
-
-
-check-logged-in-user
+if [ ${KICK_START} == false ];
+then 
+    check-logged-in-user
+    login-to-registry
+else
+    login-to-registry-auto ${RHEL_USER} ${RHEL_PASSWORD}
+fi 
 enable-pcp
+
 auto-updatecontainer
 
 echo "Building quarkuscoffeeshop-majestic-monolith container"

@@ -88,6 +88,8 @@ sudo firewall-cmd --reload
 > [kickstart.ks](kickstart.ks)
 * `cp kickstart.ks quarkuscoffeeshop-majestic-monolith.ks`
 * Change 10.0.2.2 to your repo server
+* change `yourinfo` with Red Hat login info
+* Optional: change podman subnet  `192.168.33.0/24` 
 * copy quarkuscoffeeshop-majestic-monolith.ks to your repo server 
 
 
@@ -101,7 +103,7 @@ sudo mkksiso quarkuscoffeeshop-majestic-monolith.ks image-uuid-installer.iso qua
 
 **Create VM**
 ```
-.hack/create-kvm-vms.sh quarkuscoffeeshop-majestic-monolith testme-2022
+.hack/create-kvm-vms.sh quarkuscoffeeshop-majestic-monolith edge-dev
 ```
 
 

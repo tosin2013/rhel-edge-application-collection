@@ -46,10 +46,16 @@ cd rhel-edge-application-collection
 curl -OL https://raw.githubusercontent.com/tosin2013/rhel-edge-application-collection/main/image-builder/app_env
 sed -i 's/username@redhat.com/yourinfo/g' app_env
 sed -i 's/Y0uRp@$$woRd/yourinfo/g' app_env
+podman network create --driver bridge rhel-edge --subnet 192.168.33.0/24
 ./build-scripts/applications/postgresql/postgresql.sh 
+./build-scripts/applications/quarkuscoffeeshop-majestic-monolith/quarkuscoffeeshop-majestic-monolith.sh
 podman generate systemd   --new --files --name postgresql
 mv pod-postgresql.service /etc/systemd/system/pod-postgresql.service
 mv container-postgresql-1.service /etc/systemd/system/container-postgresql-1.service
+systemctl daemon-reload
 systemctl enable pod-postgresql.service
 systemctl enable container-postgresql-1.service
+podman generate systemd   --new --files --name quarkuscoffeeshop-majestic-monolith
+mv container-quarkuscoffeeshop-majestic-monolith-1.service /etc/systemd/system/container-quarkuscoffeeshop-majestic-monolith-1.service
+mv pod-quarkuscoffeeshop-majestic-monolith.service /etc/systemd/system/pod-quarkuscoffeeshop-majestic-monolith.service
 %end

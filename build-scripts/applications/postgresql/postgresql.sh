@@ -56,7 +56,6 @@ echo "*****************************************************************"
 echo "Building pgadmin4 container"
 ${RUN_AS_SUDO}  podman pod create --name pgadmin4 -p ${PGADMIN_LISTEN_PORT}:${PGADMIN_LISTEN_PORT} --network rhel-edge
 
-sudo mkdir -p /pgadmin4
 ${RUN_AS_SUDO}  podman run   \
 -d --restart=always --pod=pgadmin4 \
 -e PGADMIN_DEFAULT_EMAIL="${PGADMIN_DEFAULT_EMAIL}" \
