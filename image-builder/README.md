@@ -98,8 +98,16 @@ sudo mkksiso quarkuscoffeeshop-majestic-monolith.ks image-uuid-installer.iso qua
 
 ## For Developers 
 > Setup devbox [Setup image builder server](dev-enviornment.md)
+
+**Create VM**
 ```
-.hack/create-kvm-vms.sh
+.hack/create-kvm-vms.sh quarkuscoffeeshop-majestic-monolith testme-2022
+```
+
+
+**Delete  VM**
+```
+.hack/delete-kvm-vms.sh quarkuscoffeeshop-majestic-monolith testme-2022
 ```
 
 # Links: 
