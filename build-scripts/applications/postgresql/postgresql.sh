@@ -9,7 +9,10 @@ else
    exit 1
 fi 
 
-check-logged-in-user
+if [ ${KICK_START} == true ];
+then 
+    check-logged-in-user
+fi 
 enable-pcp
 login-to-registry
 

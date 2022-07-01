@@ -40,7 +40,7 @@ cp /tmp/init-postgresql.sql /home/admin/data/init-postgresql.sql
 # applied at the next reboot
 #stage updates as they become available. This is highly recommended
 echo AutomaticUpdatePolicy=stage >> /etc/rpm-ostreed.conf
-
+cd /home/admin
 git clone https://github.com/tosin2013/rhel-edge-application-collection.git
 cd rhel-edge-application-collection
 sed -i "s/192.168.1.10/$(hostname -I | awk '{print $1}')/g"  build-scripts/applications/postgresql/app_env

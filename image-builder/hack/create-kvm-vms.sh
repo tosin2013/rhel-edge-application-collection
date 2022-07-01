@@ -64,3 +64,23 @@ if [[ -z "${VIRSH_VM}" ]]; then
 else
     echo "  VM ${DEV_VM_NAME} already exists ..."
 fi
+
+
+VIRSH_WATCH_CMD="sudo virsh list --state-shutoff --name"
+
+echo "===== Watching virsh to reboot VM:${DEV_VM_NAME}"
+LOOP_ON=true
+while [ $LOOP_ON = "true" ]; do
+  currentPoweredOffVMs=$($VIRSH_WATCH_CMD)
+
+    if [[  "${currentPoweredOffVMs}" ==   "${IMAGE_NAME}-${DEV_VM_NAME}" ]]; then
+      echo "  Starting VM:  ${IMAGE_NAME}-${DEV_VM_NAME} ..."
+      sudo virsh start ${IMAGE_NAME}-$DEV_VM_NAME
+      exit 0
+    else
+        echo "waiting for  ${IMAGE_NAME}-${DEV_VM_NAME}..."
+        sleep 15s
+    fi 
+
+  done < <(printf '%s' "${currentPoweredOffVMs}")
+done
