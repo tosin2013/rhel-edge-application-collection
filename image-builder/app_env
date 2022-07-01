@@ -1,0 +1,16 @@
+export KICK_START=true
+export RUN_AS_SUDO=""
+export DATABASE_NAME="coffeeshopdb"
+export DATABASE_PASSWORD="redhat-21"
+export DATABASE_USER="coffeeshopuser"
+export POSTGRES_PORT="5432"
+
+export PGADMIN_DEFAULT_EMAIL=user@domain.com
+export PGADMIN_DEFAULT_PASSWORD="password"
+export PGADMIN_LISTEN_PORT="5433"
+export STARTUP_WAIT_TIME=60
+
+export EXTERNAL_ENDPOINT="$(hostname -I | awk '{print $1}')"
+export ENABLE_PCP=false
+
+export DEBUG_SCRIPT=false
