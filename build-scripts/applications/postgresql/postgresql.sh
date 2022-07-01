@@ -42,8 +42,10 @@ ${RUN_AS_SUDO} podman run   \
 
 echo "waiting  ${STARTUP_WAIT_TIME}s for pod.."
 sleep ${STARTUP_WAIT_TIME}s
-${RUN_AS_SUDO}  podman exec -i postgresql-1  /bin/bash -c "PGPASSWORD=${DATABASE_PASSWORD} psql --username ${DATABASE_USER} ${DATABASE_NAME} < /data/init-postgresql.sql"
-
+if [ ${KICK_START} == false ];
+then 
+    ${RUN_AS_SUDO}  podman exec -i postgresql-1  /bin/bash -c "PGPASSWORD=${DATABASE_PASSWORD} psql --username ${DATABASE_USER} ${DATABASE_NAME} < /data/init-postgresql.sql"
+fi 
 
 sudo firewall-cmd --add-port=5432/tcp --zone=public --permanent
 sudo firewall-cmd --add-port=5432/tcp --zone=internal --permanent

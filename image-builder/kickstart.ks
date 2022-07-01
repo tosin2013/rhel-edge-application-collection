@@ -58,4 +58,7 @@ systemctl enable container-postgresql-1.service
 podman generate systemd   --new --files --name quarkuscoffeeshop-majestic-monolith
 mv container-quarkuscoffeeshop-majestic-monolith-1.service /etc/systemd/system/container-quarkuscoffeeshop-majestic-monolith-1.service
 mv pod-quarkuscoffeeshop-majestic-monolith.service /etc/systemd/system/pod-quarkuscoffeeshop-majestic-monolith.service
+systemctl daemon-reload
+systemctl enable pod-quarkuscoffeeshop-majestic-monolith.service
+systemctl enable container-quarkuscoffeeshop-majestic-monolith-1.service
 %end
