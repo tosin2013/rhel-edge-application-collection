@@ -16,6 +16,12 @@ function login-to-registry(){
     ${RUN_AS_SUDO} podman login registry.redhat.io
 }
 
+function login-to-registry-auto(){
+    echo "logging in to registry.redhat.io"
+    ${RUN_AS_SUDO} podman login  -u ${1} -p ${2} registry.redhat.io
+}
+
+
 function enable-pcp(){
     if [ ${ENABLE_PCP} == "true" ];
     then

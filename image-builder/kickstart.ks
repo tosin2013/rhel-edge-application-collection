@@ -43,8 +43,9 @@ echo AutomaticUpdatePolicy=stage >> /etc/rpm-ostreed.conf
 cd /home/admin
 git clone https://github.com/tosin2013/rhel-edge-application-collection.git
 cd rhel-edge-application-collection
-sed -i "s/192.168.1.10/$(hostname -I | awk '{print $1}')/g"  build-scripts/applications/postgresql/app_env
-export ENABLE_PCP=true
+curl -OL https://raw.githubusercontent.com/tosin2013/rhel-edge-application-collection/main/image-builder/app_env
+sed -i 's/username@redhat.com/yourinfo/g' app_env
+sed -i 's/Y0uRp@$$woRd/yourinfo/g' app_env
 ./build-scripts/applications/postgresql/postgresql.sh 
 podman generate systemd   --new --files --name postgresql
 mv pod-postgresql.service /etc/systemd/system/pod-postgresql.service

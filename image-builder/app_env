@@ -14,3 +14,6 @@ export EXTERNAL_ENDPOINT="$(hostname -I | awk '{print $1}')"
 export ENABLE_PCP=false
 
 export DEBUG_SCRIPT=false
+
+export RHEL_USER=username@redhat.com
+export RHEL_PASSWORD="Y0uRp@$$woRd"

@@ -1,7 +1,12 @@
 #!/bin/bash
 #set -xe 
 
-if [ -d $(pwd)/build-scripts ];
+if [ -f $(pwd)/app_env ] ; 
+then
+    set -xe 
+    source $(pwd)/app_env
+    source  $(pwd)/build-scripts/applications/functions.sh
+elif [ -d $(pwd)/build-scripts ];
 then 
     source  $(pwd)/build-scripts/applications/functions.sh
     source  $(pwd)/build-scripts/applications/postgresql/app_env
@@ -9,12 +14,15 @@ else
    exit 1
 fi 
 
-if [ ${KICK_START} == true ];
+if [ ${KICK_START} == false ];
 then 
     check-logged-in-user
+    login-to-registry
+else
+    login-to-registry-auto ${RHEL_USER} ${RHEL_PASSWORD}
 fi 
 enable-pcp
-login-to-registry
+
 
 
 echo "Building POSTGRESQL_DATABASE container"
