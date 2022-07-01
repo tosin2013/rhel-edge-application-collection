@@ -43,6 +43,26 @@ echo AutomaticUpdatePolicy=stage >> /etc/rpm-ostreed.conf
 cd /home/admin
 git clone https://github.com/tosin2013/rhel-edge-application-collection.git
 cd rhel-edge-application-collection
+cp build-scripts/image-builder-quarkuscoffeeshop-first-boot.sh /usr/local/bin/image-builder-quarkuscoffeeshop-first-boot.sh
+touch /home/admin/quarkuscoffeeshop-first-boot-configure
+sed -i 's/enforcing/permissive/g' /etc/selinux/config
+cat >/etc/systemd/system/image-builder-quarkuscoffeeshop-first-boot.service<<EOF
+[Unit]
+After=container-quarkuscoffeeshop-majestic-monolith-1.service
+Wants=network-online.target
+After=network-online.target
+ConditionPathExists=/home/admin/quarkuscoffeeshop-first-boot-configure
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/image-builder-quarkuscoffeeshop-first-boot.sh
+ExecStartPost=/usr/bin/rm /home/admin/quarkuscoffeeshop-first-boot-configure
+RemainAfterExit=yes
+
+[Install]
+WantedBy=default.target
+EOF
+sudo chmod 644 /etc/systemd/system/image-builder-quarkuscoffeeshop-first-boot.service
 curl -OL https://raw.githubusercontent.com/tosin2013/rhel-edge-application-collection/main/image-builder/app_env
 sed -i 's/username@redhat.com/yourinfo/g' app_env
 sed -i 's/Y0uRp@$$woRd/yourinfo/g' app_env
@@ -52,13 +72,18 @@ podman network create --driver bridge rhel-edge --subnet 192.168.33.0/24
 podman generate systemd   --new --files --name postgresql
 mv pod-postgresql.service /etc/systemd/system/pod-postgresql.service
 mv container-postgresql-1.service /etc/systemd/system/container-postgresql-1.service
+sudo chmod 644 /etc/systemd/system/container-postgresql-1.service
 systemctl daemon-reload
 systemctl enable pod-postgresql.service
 systemctl enable container-postgresql-1.service
 podman generate systemd   --new --files --name quarkuscoffeeshop-majestic-monolith
 mv container-quarkuscoffeeshop-majestic-monolith-1.service /etc/systemd/system/container-quarkuscoffeeshop-majestic-monolith-1.service
 mv pod-quarkuscoffeeshop-majestic-monolith.service /etc/systemd/system/pod-quarkuscoffeeshop-majestic-monolith.service
+sudo chmod 644 /etc/systemd/system/container-quarkuscoffeeshop-majestic-monolith-1.service 
+sudo chmod 644 /etc/systemd/system/pod-quarkuscoffeeshop-majestic-monolith.service 
 systemctl daemon-reload
 systemctl enable pod-quarkuscoffeeshop-majestic-monolith.service
 systemctl enable container-quarkuscoffeeshop-majestic-monolith-1.service
+systemctl enable image-builder-quarkuscoffeeshop-first-boot.service
+setenforce 0
 %end
