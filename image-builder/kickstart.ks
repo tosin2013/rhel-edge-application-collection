@@ -85,5 +85,5 @@ systemctl daemon-reload
 systemctl enable pod-quarkuscoffeeshop-majestic-monolith.service
 systemctl enable container-quarkuscoffeeshop-majestic-monolith-1.service
 systemctl enable image-builder-quarkuscoffeeshop-first-boot.service
-setenforce 0
+sed -i 's/enforcing/permissive/g' /etc/selinux/config
 %end
