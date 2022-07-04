@@ -51,12 +51,12 @@ cat >/etc/systemd/system/image-builder-quarkuscoffeeshop-first-boot.service<<EOF
 After=container-quarkuscoffeeshop-majestic-monolith-1.service
 Wants=network-online.target
 After=network-online.target
-ConditionPathExists=/home/admin/quarkuscoffeeshop-first-boot-configure
+ConditionPathExists=!/home/admin/quarkuscoffeeshop-first-boot-complete
 
 [Service]
 Type=oneshot
 ExecStart=/usr/local/bin/image-builder-quarkuscoffeeshop-first-boot.sh
-ExecStartPost=/usr/bin/rm /home/admin/quarkuscoffeeshop-first-boot-configure
+ExecStartPost=/usr/bin/touch /home/admin/quarkuscoffeeshop-first-boot-complete
 RemainAfterExit=yes
 
 [Install]
@@ -85,5 +85,4 @@ systemctl daemon-reload
 systemctl enable pod-quarkuscoffeeshop-majestic-monolith.service
 systemctl enable container-quarkuscoffeeshop-majestic-monolith-1.service
 systemctl enable image-builder-quarkuscoffeeshop-first-boot.service
-sed -i 's/enforcing/permissive/g' /etc/selinux/config
 %end

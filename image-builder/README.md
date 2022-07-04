@@ -95,6 +95,8 @@ sudo firewall-cmd --reload
 
 **Create iso with custom kickstart**
 ```
+rm quarkuscoffeeshop-majestic-monolith.iso
+
 sudo mkksiso quarkuscoffeeshop-majestic-monolith.ks image-uuid-installer.iso quarkuscoffeeshop-majestic-monolith.iso
 ```
 
