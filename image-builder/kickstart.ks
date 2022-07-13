@@ -64,8 +64,8 @@ WantedBy=default.target
 EOF
 sudo chmod 644 /etc/systemd/system/image-builder-quarkuscoffeeshop-first-boot.service
 curl -OL https://raw.githubusercontent.com/tosin2013/rhel-edge-application-collection/main/image-builder/app_env
-sed -i 's/username@redhat.com/yourinfo/g' app_env
-sed -i 's/Y0uRp@$$woRd/yourinfo/g' app_env
+sed -i 's/changeme/yourinfo/g' app_env
+sed -i 's/changeme/yourinfo/g' app_env
 podman network create --driver bridge rhel-edge --subnet 192.168.33.0/24
 ./build-scripts/applications/postgresql/postgresql.sh 
 ./build-scripts/applications/quarkuscoffeeshop-majestic-monolith/quarkuscoffeeshop-majestic-monolith.sh
