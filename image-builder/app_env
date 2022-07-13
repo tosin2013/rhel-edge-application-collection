@@ -15,8 +15,8 @@ export ENABLE_PCP=false
 
 export DEBUG_SCRIPT=false
 
-export RHEL_USER=username@redhat.com
-export RHEL_PASSWORD="Y0uRp@$$woRd"
+export RHEL_USER=changeme
+export RHEL_PASSWORD=changeme
 
 
 export EXPOSE_PORT="8080"
