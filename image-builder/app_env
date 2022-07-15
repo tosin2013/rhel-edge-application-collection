@@ -15,8 +15,8 @@ export ENABLE_PCP=false
 
 export DEBUG_SCRIPT=false
 
-export RHEL_USER=changeme
-export RHEL_PASSWORD=changeme
+export RHEL_USER=your_username
+export RHEL_PASSWORD=your_password
 
 
 export EXPOSE_PORT="8080"
