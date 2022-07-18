@@ -11,7 +11,7 @@ export PGADMIN_LISTEN_PORT="5433"
 export STARTUP_WAIT_TIME=60
 
 export EXTERNAL_ENDPOINT="$(hostname -I | awk '{print $1}')"
-export ENABLE_PCP=false
+export ENABLE_PCP=true
 
 export DEBUG_SCRIPT=false
 
