@@ -69,6 +69,7 @@ sed -i 's/your_password/yourinfo/g' app_env
 podman network create --driver bridge rhel-edge --subnet 192.168.33.0/24
 ./build-scripts/applications/postgresql/postgresql.sh 
 ./build-scripts/applications/quarkuscoffeeshop-majestic-monolith/quarkuscoffeeshop-majestic-monolith.sh
+./build-scripts/applications/pcp/performancecopilot.sh
 podman generate systemd   --new --files --name postgresql
 mv pod-postgresql.service /etc/systemd/system/pod-postgresql.service
 mv container-postgresql-1.service /etc/systemd/system/container-postgresql-1.service
@@ -82,7 +83,13 @@ mv pod-quarkuscoffeeshop-majestic-monolith.service /etc/systemd/system/pod-quark
 sudo chmod 644 /etc/systemd/system/container-quarkuscoffeeshop-majestic-monolith-1.service 
 sudo chmod 644 /etc/systemd/system/pod-quarkuscoffeeshop-majestic-monolith.service 
 systemctl daemon-reload
+./build-scripts/applications/pcp/performancecopilot.sh 
+podman generate systemd   --new --files --name grafana-1
+mv container-grafana-1.service /etc/systemd/system/container-grafana-1.service
+sudo chmod 644 /etc/systemd/system/container-grafana-1.service
+systemctl daemon-reload
 systemctl enable pod-quarkuscoffeeshop-majestic-monolith.service
 systemctl enable container-quarkuscoffeeshop-majestic-monolith-1.service
 systemctl enable image-builder-quarkuscoffeeshop-first-boot.service
+systemctl enable container-grafana-1.service
 %end
