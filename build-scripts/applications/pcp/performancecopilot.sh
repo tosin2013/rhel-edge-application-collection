@@ -2,17 +2,28 @@
 #podman run -e GF_INSTALL_PLUGINS="https://github.com/performancecopilot/grafana-pcp/releases/download/vX.Y.Z/performancecopilot-pcp-app-X.Y.Z.zip;performancecopilot-pcp-app" -p ${LISTEN_PORT}:${LISTEN_PORT} grafana/grafana
 
 
-if [ -d $(pwd)/build-scripts ];
+if [ -f $(pwd)/app_env ] ; 
+then
+    set -xe 
+    source $(pwd)/app_env
+    source  $(pwd)/build-scripts/applications/functions.sh
+elif [ -d $(pwd)/build-scripts ];
 then 
     source  $(pwd)/build-scripts/applications/functions.sh
-    source  $(pwd)/build-scripts/applications/pcp/app_env
+    source  $(pwd)/build-scripts/applications/quarkuscoffeeshop-majestic-monolith/app_env
 else
    exit 1
 fi 
 
-check-logged-in-user
+if [ ${KICK_START} == false ];
+then 
+    check-logged-in-user
+    login-to-registry
+else
+    login-to-registry-auto ${RHEL_USER} ${RHEL_PASSWORD}
+fi 
+
 enable-pcp
-login-to-registry
 
 echo "Building grafana container"
 ${RUN_AS_SUDO} podman pod create --name grafana -p ${LISTEN_PORT}:${LISTEN_PORT} --network rhel-edge 
