@@ -42,7 +42,7 @@ ${RUN_AS_SUDO} podman  run -d  \
 -e STREAM_URL="http://${EXTERNAL_ENDPOINT}:8080/dashboard/stream" \
 -e STORE_ID="${STORE_ID}" \
 --name quarkuscoffeeshop-majestic-monolith-1 \
-${CONTAINER_IMAGE}:${CONTAINER_TAG}
+${QUARKUS_CONTAINER_IMAGE}:${QUARKUS_CONTAINER_TAG}
 
 # quarkuscoffeeshop-majestic-monolith
 sudo firewall-cmd --add-port=${EXPOSE_PORT}/tcp --zone=internal --permanent

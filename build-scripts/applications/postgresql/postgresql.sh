@@ -38,7 +38,7 @@ ${RUN_AS_SUDO} podman run   \
 -e POSTGRESQL_DATABASE="${DATABASE_NAME}" \
 -e POSTGRESQL_USER="${DATABASE_USER}" \
 -e POSTGRESQL_PASSWORD="${DATABASE_PASSWORD}" \
---name=postgresql-1 registry.redhat.io/rhel8/postgresql-12 
+--name=postgresql-1 registry.redhat.io/rhel8/postgresql-14 
 
 echo "waiting  ${STARTUP_WAIT_TIME}s for pod.."
 sleep ${STARTUP_WAIT_TIME}s
