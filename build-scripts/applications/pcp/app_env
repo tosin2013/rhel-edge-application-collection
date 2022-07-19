@@ -2,6 +2,6 @@ export EXTERNAL_ENDPOINT="192.168.1.10"
 export LISTEN_PORT="3000"
 export USER_NAME="admin"
 export PASSWORD="admin"
-export CONTAINER_IMAGE="registry.redhat.io/rhel8/grafana:latest"
+export PCP_CONTAINER_IMAGE="registry.redhat.io/rhel8/grafana:latest"
 export STARTUP_WAIT_TIME=30
 export ENABLE_PCP=false
