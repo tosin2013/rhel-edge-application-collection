@@ -28,8 +28,8 @@ export RHEL_PASSWORD=your_password
 ## quarkuscoffeeshop-majestic-monolith
 export EXPOSE_PORT="8080"
 export STORE_ID="ATLANTA"
-export CONTAINER_IMAGE="quay.io/quarkuscoffeeshop/quarkuscoffeeshop-majestic-monolith"
-export CONTAINER_TAG="v0.0.2"
+export QUARKUS_CONTAINER_IMAGE="quay.io/quarkuscoffeeshop/quarkuscoffeeshop-majestic-monolith"
+export QUARKUS_CONTAINER_TAG="v0.0.2"
 export STARTUP_WAIT_TIME=30
 export PGSQL_URL="jdbc:postgresql://${EXTERNAL_ENDPOINT}:5432/coffeeshopdb?currentSchema=coffeeshop" \
 export PGSQL_USER="coffeeshopuser" \
@@ -48,5 +48,5 @@ export HOMEOFFICE_URL=http://homeoffice-ingress
 export LISTEN_PORT="3000"
 export USER_NAME="admin"
 export PASSWORD="admin"
-export CONTAINER_IMAGE="registry.redhat.io/rhel8/grafana:latest"
+export PCP_CONTAINER_IMAGE="registry.redhat.io/rhel8/grafana:latest"
 export STARTUP_WAIT_TIME=30
