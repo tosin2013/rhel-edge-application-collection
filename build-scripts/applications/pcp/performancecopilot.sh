@@ -32,7 +32,7 @@ ${RUN_AS_SUDO} podman pod create --name grafana -p ${LISTEN_PORT}:${LISTEN_PORT}
 
 ${RUN_AS_SUDO} podman run   \
 -d  --pod=grafana  \
--e GF_INSTALL_PLUGINS="https://github.com/performancecopilot/grafana-pcp/releases/download/v3.0.3/performancecopilot-pcp-app-3.0.3.zip;performancecopilot-pcp-app" \
+-e GF_INSTALL_PLUGINS="https://github.com/performancecopilot/grafana-pcp/releases/download/v5.0.0/performancecopilot-pcp-app-5.0.0.zip;performancecopilot-pcp-app" \
 --name=grafana-1  ${PCP_CONTAINER_IMAGE}
 
 sudo firewall-cmd --add-port=${LISTEN_PORT}/tcp --zone=public --permanent
