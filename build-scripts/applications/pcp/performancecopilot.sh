@@ -19,11 +19,12 @@ if [ ${KICK_START} == false ];
 then 
     check-logged-in-user
     login-to-registry
+    enable-pcp
 else
     login-to-registry-auto ${RHEL_USER} ${RHEL_PASSWORD}
 fi 
 
-enable-pcp
+
 
 echo "Building grafana container"
 ${RUN_AS_SUDO} podman pod create --name grafana -p ${LISTEN_PORT}:${LISTEN_PORT} --network rhel-edge 

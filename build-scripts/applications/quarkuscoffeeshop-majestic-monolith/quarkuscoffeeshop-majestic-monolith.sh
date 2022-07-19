@@ -17,10 +17,10 @@ if [ ${KICK_START} == false ];
 then 
     check-logged-in-user
     login-to-registry
+    enable-pcp
 else
     login-to-registry-auto ${RHEL_USER} ${RHEL_PASSWORD}
 fi 
-enable-pcp
 
 auto-updatecontainer
 
