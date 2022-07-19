@@ -92,4 +92,9 @@ systemctl enable pod-quarkuscoffeeshop-majestic-monolith.service
 systemctl enable container-quarkuscoffeeshop-majestic-monolith-1.service
 systemctl enable image-builder-quarkuscoffeeshop-first-boot.service
 systemctl enable container-grafana-1.service
+systemctl enable  pmlogger_daily_report.timer pmlogger_daily_report-poll.timer --now
+systemctl enable pmproxy
+systemctl start pmproxy
+firewall-cmd --add-service=pmproxy --permanent
+firewall-cmd --reload
 %end
