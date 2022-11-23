@@ -9,6 +9,8 @@ else
    exit 1
 fi 
 
+sudo podman pod  start $(sudo podman pod ls  | grep Stopped | awk '{print $1}')
+
 echo "Running First Boot Script" >  /opt/quarkuscoffeeshop-majestic-monolith/first-boot.log
 until [ "`podman inspect -f {{.State.Running}} postgresql-1`"=="true" ]; do
     sleep 0.1;
