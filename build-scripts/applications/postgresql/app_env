@@ -13,3 +13,4 @@ export ENABLE_PCP=false
 
 export DEBUG_SCRIPT=false
 export KICK_START=false
+export WORKING_DIR="${HOME}/data"

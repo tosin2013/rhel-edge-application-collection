@@ -26,13 +26,13 @@ fi
 echo "Building POSTGRESQL_DATABASE container"
 ${RUN_AS_SUDO} podman pod create --name postgresql -p 5432:5432 --network rhel-edge
 
-mkdir -p ${HOME}/data
+mkdir -p ${WORKING_DIR}
 curl -L https://raw.githubusercontent.com/jeremyrdavis/quarkuscoffeeshop-majestic-monolith/main/init-postgresql.sql  --output /tmp/init-postgresql.sql
-cp /tmp/init-postgresql.sql ${HOME}/data/init-postgresql.sql
+cp /tmp/init-postgresql.sql ${WORKING_DIR}/init-postgresql.sql
 
 ${RUN_AS_SUDO} podman run   \
 -d --restart=always --pod=postgresql \
--v ${HOME}/data:/data:Z \
+-v ${WORKING_DIR}:/data:Z \
 -e POSTGRESQL_DATABASE="${DATABASE_NAME}" \
 -e POSTGRESQL_USER="${DATABASE_USER}" \
 -e POSTGRESQL_PASSWORD="${DATABASE_PASSWORD}" \
@@ -45,9 +45,9 @@ then
     ${RUN_AS_SUDO}  podman exec -i postgresql-1  /bin/bash -c "PGPASSWORD=${DATABASE_PASSWORD} psql --username ${DATABASE_USER} ${DATABASE_NAME} < /data/init-postgresql.sql"
 fi 
 
-sudo firewall-cmd --add-port=5432/tcp --zone=public --permanent
-sudo firewall-cmd --add-port=5432/tcp --zone=internal --permanent
-sudo firewall-cmd --reload
+${RUN_AS_SUDO} firewall-cmd --add-port=5432/tcp --zone=public --permanent
+${RUN_AS_SUDO} firewall-cmd --add-port=5432/tcp --zone=internal --permanent
+${RUN_AS_SUDO} firewall-cmd --reload
 
 echo "*****************************************************************"
 echo "POSTGRESS EXTERNAL ENDPOINT ${EXTERNAL_ENDPOINT}:5432"
@@ -63,9 +63,9 @@ ${RUN_AS_SUDO}  podman run   \
 -e PGADMIN_LISTEN_PORT="${PGADMIN_LISTEN_PORT}" \
 --name=pgadmin4-1 docker.io/dpage/pgadmin4:latest
 
-sudo firewall-cmd --add-port=${PGADMIN_LISTEN_PORT}/tcp --zone=public --permanent
-sudo firewall-cmd --add-port=${PGADMIN_LISTEN_PORT}/tcp --zone=internal --permanent
-sudo firewall-cmd --reload
+${RUN_AS_SUDO} firewall-cmd --add-port=${PGADMIN_LISTEN_PORT}/tcp --zone=public --permanent
+${RUN_AS_SUDO} firewall-cmd --add-port=${PGADMIN_LISTEN_PORT}/tcp --zone=internal --permanent
+${RUN_AS_SUDO} firewall-cmd --reload
 
 echo "waiting  ${STARTUP_WAIT_TIME}s for pod.."
 sleep ${STARTUP_WAIT_TIME}s
