@@ -1,10 +1,10 @@
 #!/bin/bash 
 
-if [ -f /home/admin/rhel-edge-application-collection/app_env ] ; 
+if [ -f /opt/quarkuscoffeeshop-majestic-monolith/rhel-edge-application-collection/app_env ] ; 
 then
     set -xe 
-    source /home/admin/rhel-edge-application-collection/app_env
-    source /home/admin/rhel-edge-application-collection/build-scripts/applications/functions.sh
+    source /opt/quarkuscoffeeshop-majestic-monolith/rhel-edge-application-collection/app_env
+    source /opt/quarkuscoffeeshop-majestic-monolith/rhel-edge-application-collection/build-scripts/applications/functions.sh
 else
    exit 1
 fi 
