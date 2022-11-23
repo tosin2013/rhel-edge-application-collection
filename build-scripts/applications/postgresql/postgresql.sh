@@ -24,14 +24,16 @@ else
 fi 
 
 echo "Building POSTGRESQL_DATABASE container"
-${RUN_AS_SUDO} podman pod create --name postgresql -p 5432:5432 --network rhel-edge
+# ${RUN_AS_SUDO} podman pod create --name postgresql -p 5432:5432 --network rhel-edge
 
 mkdir -p ${WORKING_DIR}
 curl -L https://raw.githubusercontent.com/jeremyrdavis/quarkuscoffeeshop-majestic-monolith/main/init-postgresql.sql  --output /tmp/init-postgresql.sql
 cp /tmp/init-postgresql.sql ${WORKING_DIR}/init-postgresql.sql
 
+#--pod=postgresql
+
 ${RUN_AS_SUDO} podman run   \
--d --restart=always --pod=postgresql \
+-d --restart=always  --network=host \ 
 -v ${WORKING_DIR}:/data:Z \
 -e POSTGRESQL_DATABASE="${DATABASE_NAME}" \
 -e POSTGRESQL_USER="${DATABASE_USER}" \
