@@ -55,10 +55,10 @@ echo "POSTGRESS EXTERNAL ENDPOINT ${EXTERNAL_ENDPOINT}:5432"
 echo "*****************************************************************"
 
 echo "Building pgadmin4 container"
-${RUN_AS_SUDO}  podman pod create --name pgadmin4 -p ${PGADMIN_LISTEN_PORT}:${PGADMIN_LISTEN_PORT} --network rhel-edge
+#${RUN_AS_SUDO}  podman pod create --name pgadmin4 -p ${PGADMIN_LISTEN_PORT}:${PGADMIN_LISTEN_PORT} --network rhel-edge
 
 ${RUN_AS_SUDO}  podman run   \
--d --restart=always --pod=pgadmin4 \
+-d --restart=always --network=host \
 -e PGADMIN_DEFAULT_EMAIL="${PGADMIN_DEFAULT_EMAIL}" \
 -e PGADMIN_DEFAULT_PASSWORD="${PGADMIN_DEFAULT_PASSWORD}" \
 -e PGADMIN_LISTEN_PORT="${PGADMIN_LISTEN_PORT}" \
