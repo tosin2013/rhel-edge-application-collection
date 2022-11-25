@@ -27,11 +27,11 @@ fi
 
 
 echo "Building grafana container"
-${RUN_AS_SUDO} podman pod create --name grafana -p ${LISTEN_PORT}:${LISTEN_PORT} --network rhel-edge 
+#${RUN_AS_SUDO} podman pod create --name grafana -p ${LISTEN_PORT}:${LISTEN_PORT} --network rhel-edge 
 
 
 ${RUN_AS_SUDO} podman run   \
--d  --pod=grafana  \
+-d  --network=host \
 -e GF_INSTALL_PLUGINS="https://github.com/performancecopilot/grafana-pcp/releases/download/v${PCP_VERSION}/performancecopilot-pcp-app-${PCP_VERSION}.zip;performancecopilot-pcp-app" \
 --name=grafana-1  ${PCP_CONTAINER_IMAGE}
 
