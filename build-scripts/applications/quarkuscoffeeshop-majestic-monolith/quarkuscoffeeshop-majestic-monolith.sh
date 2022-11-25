@@ -25,9 +25,9 @@ fi
 auto-updatecontainer
 
 echo "Building quarkuscoffeeshop-majestic-monolith container"
-${RUN_AS_SUDO} podman pod create --name  quarkuscoffeeshop-majestic-monolith  -p ${EXPOSE_PORT}:${EXPOSE_PORT} --network rhel-edge 
+#${RUN_AS_SUDO} podman pod create --name  quarkuscoffeeshop-majestic-monolith  -p ${EXPOSE_PORT}:${EXPOSE_PORT} --network rhel-edge 
 ${RUN_AS_SUDO} podman  run -d  \
---pod=quarkuscoffeeshop-majestic-monolith \
+ --network=host \
  ${AUTO_UPDATE} \
 -e PGSQL_URL=${PGSQL_URL} \
 -e PGSQL_USER=${PGSQL_USER} \
