@@ -27,7 +27,8 @@ user --name={{ rfe_user | default('core') }} --groups=wheel --password={{ rfe_pa
 # set up the OSTree-based install with disabled GPG key verification, the base
 # URL to pull the installation content, 'rhel' as the management root in the
 # repo, and 'rhel/8/x86_64/edge' as the branch for the installation
-ostreesetup --nogpg --url={{ rfe_tarball_url }}/repo/ --osname=rhel --remote=edge --ref=rhel/8/x86_64/edge
+#ostreesetup --nogpg --url={{ rfe_tarball_url }}/repo/ --osname=rhel --remote=edge --ref=rhel/8/x86_64/edge
+ostreesetup --nogpg --osname=rhel --remote=edge --url=file:///run/install/repo/ostree/repo --ref=rhel/8/x86_64/edge
 
 %post
 
